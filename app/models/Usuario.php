@@ -22,7 +22,7 @@ class Usuario extends \Model {
         public function registrar($datos){
 
             try {
-                parent::create($datos);
+                Usuario::create($datos);
                 // Iniciamos sesion
                 $_SESSION['email_usuario'] = $datos['email'];
                 return true;

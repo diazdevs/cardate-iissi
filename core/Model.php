@@ -46,7 +46,7 @@ class Model {
         }
     }
 
-    private static function requestDb($query, $params=false) {
+    public static function requestDb($query, $params=false) {
         // Ver mas sobre try-catch https://phpdelusions.net/delusion/try-catch
         global $connection;
         $db = $connection->db;
@@ -83,6 +83,7 @@ class Model {
     public static function count($params=[]) {
         $query = "SELECT COUNT(*) FROM :TABLE_NAME";
         if ($params)
+            $values = transformValues($params);
             $query .= " WHERE ($values)";
         return static::requestDb($query, $params)->fetchColumn();
     }
@@ -95,6 +96,7 @@ class Model {
         $values = join(",", array_map(function($val){return ":$val";}, array_keys($params)));
         $columns = join(",", array_keys($params));
         $query = "INSERT INTO :TABLE_NAME ($columns) VALUES ($values)";
+        // print_r(static::class);
         return static::requestDb($query, $params) !== false;
     }
 
