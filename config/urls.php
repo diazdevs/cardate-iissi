@@ -1,6 +1,6 @@
 <?php
 
-$urls = [
+$router_urls = [
     // Paginas base
     ['', 'Base->index'],
     ['about', 'Base->about'],
@@ -25,10 +25,6 @@ $urls = [
 
     // Vehiculo
     ['vehiculos/crear', 'Vehiculo->create'],
-
-
 ];
-
-define('URLS', $urls);
 
 ?>

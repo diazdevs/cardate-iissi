@@ -46,7 +46,7 @@ class Model {
         }
     }
 
-    private function requestDb($query, $params=false) {
+    private static function requestDb($query, $params=false) {
         // Ver mas sobre try-catch https://phpdelusions.net/delusion/try-catch
         global $connection;
         $db = $connection->db;
@@ -61,14 +61,14 @@ class Model {
         return $request;
     }
 
-    public function all($columns=['*']) {
+    public static function all($columns=['*']) {
         // Pedimos todas las columnas o solo algunas
         $query = "SELECT " . join(',', $columns) . " FROM :TABLE_NAME";
         $res = static::requestDb($query);
         return $res->fetchAll(PDO::FETCH_CLASS, static::class);
     }
 
-    public function filter($params, $columns=['*']) {
+    public static function filter($params, $columns=['*']) {
         // Pedimos todas las columnas o solo algunas
         $values = transformValues($params);
         $query = "SELECT " . join(',', $columns) . " FROM :TABLE_NAME WHERE ($values)";
@@ -76,22 +76,22 @@ class Model {
         return $res->fetchAll(PDO::FETCH_CLASS, static::class);
     }
 
-    public function get($params, $columns=['*']){
+    public static function get($params, $columns=['*']){
         return current(static::filter($params, $columns));
     }
 
-    public function count($params=[]) {
+    public static function count($params=[]) {
         $query = "SELECT COUNT(*) FROM :TABLE_NAME";
         if ($params)
             $query .= " WHERE ($values)";
         return static::requestDb($query, $params)->fetchColumn();
     }
     
-    public function exists($params) {
+    public static function exists($params) {
         return (bool)static::count($params);
     }
 
-    public function create($params) {
+    public static function create($params) {
         $values = join(",", array_map(function($val){return ":$val";}, array_keys($params)));
         $columns = join(",", array_keys($params));
         $query = "INSERT INTO :TABLE_NAME ($columns) VALUES ($values)";
@@ -101,7 +101,7 @@ class Model {
     /**
      * Not implemented
      */
-    public function save() {
+    public static function save() {
         $columns = get_object_vars(static::class);
         $changed_columns = join(",", array_map(
             function ($column) {
@@ -114,7 +114,7 @@ class Model {
     }
 
     // Bulk delete
-    public function delete($params){
+    public static function delete($params){
         $values = transformValues($params);
         $query = "DELETE FROM :TABLE_NAME WHERE ($values)";
         $deleted = static::requestDb($query, $params);

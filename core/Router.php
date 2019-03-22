@@ -22,11 +22,12 @@ class Router {
 
     public function __construct($request) {
         // vamos a transformar las urls
+        global $router_urls;
         $this->urls = array_map(function($obj){
             return [
                 'url' => explode('/', $obj[0]),
                 'method' => $obj[1]];
-            }, constant('URLS'));
+            }, $router_urls);
 
         $matchPath = $this->parser($request);
 
