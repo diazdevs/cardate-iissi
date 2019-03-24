@@ -7,6 +7,23 @@ function codificar_pass($pass){
     return password_hash($pass, PASSWORD_DEFAULT);
 }
 
+# https://www.bufa.es/php-funcion-validar-dni/
+function validar_dni($dni){
+    $letra = substr($dni, -1);
+    $numeros = substr($dni, 0, -1);
+    if (is_numeric($numeros) and ctype_alpha($letra)){
+        return substr("TRWAGMYFPDXBNJZSQVHLCKE", $numeros%23, 1) == $letra && strlen($letra) == 1 && strlen ($numeros) == 8;
+    } else {
+        return false;
+    }
+}
+
+function validar_telefono($telefono){
+    /* implementar */
+    return true;
+}
+
+
 class FormLogin extends \Form {
     const CLASE = 'Usuario';
 
@@ -75,11 +92,11 @@ class FormRegistro extends \Form {
         if ($data['contra1'] != $data['contra2'])
             $errors['contra2'] = 'Las Contraseñas no coinciden';
         // Comprobamos que el formato del dni es correcto
-        // if (!validar_dni($data['dni']))
-        //     $errors['dni'] = 'Formato dni incorrecto.';
-        // // Comprobamos que el formato del telefono es valido
-        // if (!validar_telefono($data['telefono']))
-        //     $errors['telefono'] = 'Formato telefono incorrecto.';
+        if (!validar_dni($data['dni']))
+            $errors['dni'] = 'Formato dni incorrecto.';
+        // Comprobamos que el formato del telefono es valido
+        if (!validar_telefono($data['telefono']))
+            $errors['telefono'] = 'Formato telefono incorrecto.';
     
         
         // Actualizamos errores
