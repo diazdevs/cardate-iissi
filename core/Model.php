@@ -49,16 +49,24 @@ class Model {
     public static function requestDb($query, $params=false) {
         // Ver mas sobre try-catch https://phpdelusions.net/delusion/try-catch
         global $connection;
-        $db = $connection->db;
-        $request = $db->prepare(str_replace(':TABLE_NAME', static::TABLE_NAME, $query));
-
-        if ($params) {
-            $request->execute($params);
-        } else {
-            $request->execute();
+        try {
+            $db = $connection->db;
+            $request = $db->prepare(str_replace(':TABLE_NAME', static::TABLE_NAME, $query));
+    
+            if ($params) {
+                $request->execute($params);
+            } else {
+                $request->execute();
+            }
+    
+            return $request;
+        } catch (PDOException $e) {
+            echo '<h1>Error base de datos</h1>';
+            echo('<div style="padding:20px;background:#ddd;border:1px solid #999;>"Error connection: </div>' . $e->getMessage());
+            exit;
         }
 
-        return $request;
+        
     }
 
     public static function all($columns=['*']) {

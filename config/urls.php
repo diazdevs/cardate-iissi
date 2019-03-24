@@ -18,7 +18,7 @@ $router_urls = [
     ['citas/crear', 'Cita->crearCita'],
 
     // Crawler
-    ['cargar', 'Crawler->do'],
+    ['cargar', 'Crawler->crawler'],
     
     // Dashboard
     ['administracion', 'Administracion->index'],
