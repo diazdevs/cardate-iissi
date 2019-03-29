@@ -19,7 +19,7 @@ class Usuario extends \Model {
     public $es_admin;
 
 
-        public function registrar($datos){
+        public static function registrar($datos){
 
             try {
                 Usuario::create($datos);
@@ -32,7 +32,7 @@ class Usuario extends \Model {
 
         }
 
-        public function login($datos){
+        public static function login($datos){
             $usuario = Usuario::get(array('email'=>$datos['email']));
 
             // Si existe un cliente con ese email y ademas con esa contrasenya, creamos la sesion
@@ -46,7 +46,7 @@ class Usuario extends \Model {
             return false;
         }
 
-        public function current() {
+        public static function current() {
             if (isset($_SESSION['email_usuario'])){
                 $usuario = Usuario::get(array('email'=>$_SESSION['email_usuario']));
                 // Comprobamos que existe un usuario con ese email para evitar errores despues
@@ -59,6 +59,11 @@ class Usuario extends \Model {
             }
 
             return false;
+        }
+
+        public static function es_admin(){
+            $usuario = static::current();
+            return $usuario && $usuario->es_admin;
         }
 
 }

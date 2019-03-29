@@ -1,117 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base/base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Cardate</title>
+{% block content %}
+<main role="main">
 
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
-  </script>
-  <link rel="stylesheet" href="https://getbootstrap.com/docs/4.2/examples/album/album.css">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
-  </script>
-
-
-  <script>
-    function showUser(str) {
-
-      $.ajax({
-        url: 'http://localhost/getmarca.php?marca=' + str,
-        dataType: 'application/json',
-        success: function (data) {
-          alert(data);
-
-        },
-        error: function (req, err) {
-          console.log(err);
-        }
-
-
-      });
-
-    }
-  </script>
-</head>
-
-<body>
-
-  {% include 'header.html' %}
-
-  <main role="main">
-
-    <section class="jumbotron text-center" style="
-    
-    
-    /* fallback */
-    /* W3C */
-   background: linear-gradient(to right, rgba(255, 255, 255, 0.52) 20%,                rgb(125, 189, 183)), url(http://1.bp.blogspot.com/-BiPnMV3jF2o/UE9F70zYjbI/AAAAAAAABb4/XDx-pcoFd9s/s1600/seatarosa.jpg);
-   background-size: cover;
-   background-position: 50% 50%;
+  <section class="jumbotron text-center" style="
+  /* fallback */
+  /* W3C */
+ background: linear-gradient(to right, rgba(255, 255, 255, 0.52) 20%,                rgb(125, 189, 183)), url(http://1.bp.blogspot.com/-BiPnMV3jF2o/UE9F70zYjbI/AAAAAAAABb4/XDx-pcoFd9s/s1600/seatarosa.jpg);
+ background-size: cover;
+ background-position: 50% 50%;
 ">
-      <div class="container">
-        <h1 class="jumbotron-heading text-light">Pide cita online</h1>
-        <p class="lead"><b>Gracias a cardate pedir cita online es más fácil,<br> te responderemos de inmediato</b><p>
-            <div class="row">
-              <div class="col-md-4">
-            <select name="users" class="form-control " onchange="showUser(this.value)">
-              <option>Elige una marca:</option>
-              {% for marca in marcas %}
-              <option value="{{ marca.id }}">{{ marca.nombre }}</option>
-              {% endfor %}
-            </select>
-          </div>
-          <div class="col-md-4">
-            <select name="users" class="form-control" onchange="showUser(this.value)">
-              <option>Elige un modelo:</option>
-              {% for modelo in modelos %}
-              <option value="{{ modelo }}">{{ modelo }}</option>
-              {% endfor %}
-            </select>
-          </div>
-          <div class="col-md-4">
-            <select name="users" class="form-control" onchange="showUser(this.value)">
-              <option>Elige una version:</option>
-              {% for version in versiones %}
-              <option value="{{ version }}">{{ version }}</option>
-              {% endfor %}
-            </select>
-          </div>
-          </div>
-            <a href="/citas/crear" class="btn btn-primary my-2">Crear cita</a>
-      </div>
-    </section>
-
-    <section class="jumbotron text-center">
-      <div class="container">
-        <h1 class="jumbotron-heading">Talleres paco</h1>
-        <p class="lead"><b>¡Ven y arregla tu seat arosa!</b><p>
-    </section>
-
-  </main>
-
-  <footer class="text-muted">
     <div class="container">
-      <p class="float-right">
-        <a href="#">Back to top</a>
-      </p>
-      <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-      <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a
-          href="/docs/4.2/getting-started/introduction/">getting
-          started guide</a>.</p>
+      <h1 class="jumbotron-heading text-light">Pide cita online</h1>
+      <p class="lead"><b>Gracias a cardate pedir cita online es más fácil,<br> te responderemos de inmediato</b>
+        <p>
+          <div class="row">
+            <div class="col-md-4">
+              <select name="users" class="form-control " onchange="showUser(this.value)">
+                <option>Elige una marca:</option>
+                {% for marca in marcas %}
+                <option value="{{ marca.id }}">{{ marca.nombre }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-4">
+              <select name="users" class="form-control" onchange="showUser(this.value)">
+                <option>Elige un modelo:</option>
+                {% for modelo in modelos %}
+                <option value="{{ modelo }}">{{ modelo }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-4">
+              <select name="users" class="form-control" onchange="showUser(this.value)">
+                <option>Elige una version:</option>
+                {% for version in versiones %}
+                <option value="{{ version }}">{{ version }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <a href="/citas/crear" class="btn btn-primary my-2">Crear cita</a>
     </div>
-  </footer>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
-  </script>
+  </section>
 
-</body>
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Talleres paco</h1>
+      <p class="lead"><b>¡Ven y arregla tu seat arosa!</b>
+        <p>
+  </section>
 
-</html>
+</main>
+{% endblock %}

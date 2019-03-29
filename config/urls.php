@@ -21,7 +21,7 @@ $router_urls = [
     ['cargar', 'Crawler->crawler'],
     
     // Dashboard
-    ['administracion', 'Administracion->index'],
+    ['admin', 'Administracion->index'],
 
     // Vehiculo
     ['vehiculos/crear', 'Vehiculo->create'],

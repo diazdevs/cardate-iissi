@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}Cardate{% endblock title %}</title>
+
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+  </script>
+  <link rel="stylesheet" href="https://getbootstrap.com/docs/4.2/examples/album/album.css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+  </script>
+
+
+  <script>
+    function showUser(str) {
+
+      $.ajax({
+        url: 'http://localhost/getmarca.php?marca=' + str,
+        dataType: 'application/json',
+        success: function (data) {
+          alert(data);
+
+        },
+        error: function (req, err) {
+          console.log(err);
+        }
+
+
+      });
+
+    }
+  </script>
+</head>
+
+<body>
+
+  {% block header %}
+    {% include 'base/header.html' %}
+  {% endblock %}
+
+  {% block content %}
+  {% endblock content %}
+
+
+  {% block footer %}
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Back to top</a>
+      </p>
+      <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
+      <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a
+          href="/docs/4.2/getting-started/introduction/">getting
+          started guide</a>.</p>
+    </div>
+  </footer>
+  {% endblock footer %}
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+  </script>
+
+</body>
+
+</html>

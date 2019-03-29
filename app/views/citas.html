@@ -1,97 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cardate</title>
+{% block title %}Mis citas{% endblock %}
 
+{% block content %}
+<main role="main">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-        crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.2/examples/album/album.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-
-
-    <script>
-        function showUser(str) {
-      $.ajax({
-        url: 'http://localhost/getmarca.php?marca='+str,
-        dataType: 'application/json',
-        success: function(data){
-          alert(data);
-            return data;
-        }
-      });
-
-    }
-</script>
-</head>
-
-<body>
-
-    {% include 'header.html' %}
-
-    <main role="main">
-
-        <section class="jumbotron text-center">
-            <div class="container">
-                <h1 class="jumbotron-heading">Ver citas</h1>
-                
-                <p class="lead text-muted">Gracias a cardate pedir cita online es más facil.<br> Selecciona
-                    tu vehiculo<p>
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Fecha creacion</th>
-                                    <th scope="col">Hora Inicio</th>
-                                    <th scope="col">Hora Fin</th>
-                                    <th scope="col">Motivo</th>
-                                    <th scope="col">Vehiculo</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for cita in citas %}
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>{{ cita.fecha_creacion }}</td>
-                                    <td>{{ cita.hora_inicio }}</td>
-                                    <td>{{ cita.hora_fin }}</td>
-                                    <td>{{ cita.motivo }}</td>
-                                    <td><a href="vehiculos.php/?id={{ cita.id_vehiculo }}"> Ver información</a></td>
-                                    <td><a href="/citas/{{ cita.id }}"> Detalles</a></td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        <a href="/citas/crear" class="btn btn-success">Nueva cita</a>
-            </div>
-        </section>
-
-     
-    </main>
-
-    <footer class="text-muted">
+    <section class="jumbotron text-center">
         <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-            <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-            <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.2/getting-started/introduction/">getting
-                    started guide</a>.</p>
+            <h1 class="jumbotron-heading">Ver citas</h1>
+
+            <p class="lead text-muted">Gracias a cardate pedir cita online es más facil.<br> Selecciona
+                tu vehiculo<p>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Fecha creacion</th>
+                                <th scope="col">Hora Inicio</th>
+                                <th scope="col">Hora Fin</th>
+                                <th scope="col">Motivo</th>
+                                <th scope="col">Vehiculo</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cita in citas %}
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{ cita.fecha_creacion }}</td>
+                                <td>{{ cita.hora_inicio }}</td>
+                                <td>{{ cita.hora_fin }}</td>
+                                <td>{{ cita.motivo }}</td>
+                                <td><a href="vehiculos.php/?id={{ cita.id_vehiculo }}"> Ver información</a></td>
+                                <td><a href="/citas/{{ cita.id }}"> Detalles</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <a href="/citas/crear" class="btn btn-success">Nueva cita</a>
         </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
+    </section>
 
-</body>
 
-</html>
+</main>
+{% endblock content %}
