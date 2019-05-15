@@ -14,7 +14,7 @@ class Controller {
         if (!in_array($_SERVER['REQUEST_METHOD'], $this->availableMethods))
             $this->http500();
 
-        // Check csrf_token is received if request method is posta
+        // Check csrf_token is received if request method is post
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['token']) && $_POST['token'] == $_SESSION['token'])    
             $this->http500();
     }
@@ -46,7 +46,7 @@ class Controller {
         echo $twig->render($template, $ctx);
     }
 
-    // 400 Bad Request1
+    // 400 Bad Request
     public function http400($extra=false){
         http_response_code(400);
         $this->render('errors/400.html');
