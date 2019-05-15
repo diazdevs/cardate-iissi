@@ -46,7 +46,7 @@ class Controller {
         echo $twig->render($template, $ctx);
     }
 
-    // 400 Bad Request
+    // 400 Bad Request1
     public function http400($extra=false){
         http_response_code(400);
         $this->render('errors/400.html');
