@@ -14,7 +14,7 @@ class Controller {
         if (!in_array($_SERVER['REQUEST_METHOD'], $this->availableMethods))
             $this->http500();
 
-        // Check csrf_token is received if request method is post
+        // Check csrf_token is received if request method is posta
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['token']) && $_POST['token'] == $_SESSION['token'])    
             $this->http500();
     }
