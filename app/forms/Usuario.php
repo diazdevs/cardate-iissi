@@ -18,9 +18,13 @@ function validar_dni($dni){
     }
 }
 
-function validar_telefono($telefono){
-    /* implementar */
-    return true;
+function validar_telefono($telefono) {
+    $valNum = '/^[9|6|7][0-9]{8}$/';
+    if (preg_match($valNum, $telefono)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
