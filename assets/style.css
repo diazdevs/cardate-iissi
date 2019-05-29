@@ -12,7 +12,7 @@ body {
 }
 
 .tabla-horarios td:hover {
-    background-color: greenyellow;
+    background-color: #1fca00;
     cursor: pointer;
 }
 

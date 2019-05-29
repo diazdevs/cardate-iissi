@@ -104,8 +104,9 @@
   <script src="/assets/validacion_usuario.js" type="text/javascript"></script>
   <script>
     $(document).ready(function () {
-      $("#formulario").on("submit", function () {
-        return validateForm();
+      $("#formulario").on("submit", function (event) {
+        event.preventDefault();
+        validateForm();
       });
 
       $("#contra1").on("keyup", function () {
