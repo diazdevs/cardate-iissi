@@ -1,11 +1,14 @@
 function validateForm() {
-    var error1 = validarDNI();
-    var error2 = validarEmail();
-    var error3 = validarTelefono();
-    var error4 = validarContra();
-    var error5 = validarContrasIguales();
-
-    return (error1.length == 0) && (error2.length == 0) && (error3.length == 0) && (error4.length == 0)(error5.length == 0);
+    var noValidation = document.getElementById("#formulario").novalidate;
+    if (!noValidation) {
+        var error1 = validarDNI();
+        var error2 = validarEmail();
+        var error3 = validarTelefono();
+        var error4 = validarContra();
+        var error5 = validarContrasIguales();
+        return (error1.length == 0) && (error2.length == 0) && (error3.length == 0) && (error4.length == 0)(error5.length == 0);
+    } else
+        return true;
 }
 
 
@@ -117,82 +120,87 @@ function validarContrasIguales() {
 
 //Funcion para calcular la letra del DNI
 function letraDNI(numeroDNI) {
-    var numero = numeroDNI % 23;
-    var letra = "";
-    switch (numero) {
-        case 0:
-            letra = "T";
-            break;
-        case 1:
-            letra = "R";
-            break;
-        case 2:
-            letra = "W";
-            break;
-        case 3:
-            letra = "A";
-            break;
-        case 4:
-            letra = "G";
-            break;
-        case 5:
-            letra = "M";
-            break;
-        case 6:
-            letra = "Y";
-            break;
-        case 7:
-            letra = "F";
-            break;
-        case 8:
-            letra = "P";
-            break;
-        case 9:
-            letra = "D";
-            break;
-        case 10:
-            letra = "X";
-            break;
-        case 11:
-            letra = "B";
-            break;
-        case 12:
-            letra = "N";
-            break;
-        case 13:
-            letra = "J";
-            break;
-        case 14:
-            letra = "Z";
-            break;
-        case 15:
-            letra = "S";
-            break;
-        case 16:
-            letra = "Q";
-            break;
-        case 17:
-            letra = "V";
-            break;
-        case 18:
-            letra = "H";
-            break;
-        case 19:
-            letra = "L";
-            break;
-        case 20:
-            letra = "C";
-            break;
-        case 21:
-            letra = "K";
-            break;
-        case 22:
-            letra = "E";
-            break;
+    if (numeroDNI.length == 8) {
+        var numero = parseInt(numeroDNI) % 23;
+        var letra = "";
+        switch (numero) {
+            case 0:
+                letra = "T";
+                break;
+            case 1:
+                letra = "R";
+                break;
+            case 2:
+                letra = "W";
+                break;
+            case 3:
+                letra = "A";
+                break;
+            case 4:
+                letra = "G";
+                break;
+            case 5:
+                letra = "M";
+                break;
+            case 6:
+                letra = "Y";
+                break;
+            case 7:
+                letra = "F";
+                break;
+            case 8:
+                letra = "P";
+                break;
+            case 9:
+                letra = "D";
+                break;
+            case 10:
+                letra = "X";
+                break;
+            case 11:
+                letra = "B";
+                break;
+            case 12:
+                letra = "N";
+                break;
+            case 13:
+                letra = "J";
+                break;
+            case 14:
+                letra = "Z";
+                break;
+            case 15:
+                letra = "S";
+                break;
+            case 16:
+                letra = "Q";
+                break;
+            case 17:
+                letra = "V";
+                break;
+            case 18:
+                letra = "H";
+                break;
+            case 19:
+                letra = "L";
+                break;
+            case 20:
+                letra = "C";
+                break;
+            case 21:
+                letra = "K";
+                break;
+            case 22:
+                letra = "E";
+                break;
+        }
+        return letra;
+    } else {
 
     }
 
-    return letra;
+
+
 }
 
 /* Funcion para calcular la fortaleza de la contraseña*/
@@ -223,24 +231,24 @@ function seguridad_clave(clave) {
 }
 
 /*Funcion para darle color al imput según su fortaleza*/
-function colorContraseña() {
-    $("#pass").on("keyup", function () {
+function colorContra() {
+    $("#contra1").on("keyup", function () {
 
-        var clave = $("#pass").val();
+        var clave = $("#contra1").val();
         if (seguridad_clave(clave) < 10) {
-            $("#pass").css("background-color", "red");
+            $("#contra1").css("background-color", "red");
         } else if (seguridad_clave(clave) >= 10 && seguridad_clave(clave) < 30) {
-            $("#pass").css("background-color", "#ffaf7f");
+            $("#contra1").css("background-color", "#ffaf7f");
         } else if (seguridad_clave(clave) >= 30 && seguridad_clave(clave) < 40) {
-            $("#pass").css("background-color", "#ffc976");
+            $("#contra1").css("background-color", "#ffc976");
         } else if (seguridad_clave(clave) >= 40 && seguridad_clave(clave) < 60) {
-            $("#pass").css("background-color", "#fffd88");
+            $("#contra1").css("background-color", "#fffd88");
         } else if (seguridad_clave(clave) >= 60 && seguridad_clave(clave) <= 70) {
-            $("#pass").css("background-color", "#eff580");
+            $("#contra1").css("background-color", "#eff580");
         } else if (seguridad_clave(clave) > 70 && seguridad_clave(clave) <= 90)
-            $("#pass").css("background-color", "#cde762");
+            $("#contra1").css("background-color", "#cde762");
         else if (seguridad_clave(clave) > 90) {
-            $("#pass").css("background-color", "#8bff65");
+            $("#contra1").css("background-color", "#8bff65");
         }
 
     })
