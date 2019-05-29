@@ -97,3 +97,12 @@
     </form>
   </div>
 {% endblock content %}
+
+{% block javascript %}
+{{ block.parent }}
+
+<script src="/assets/validacion_usuario.js"></script>
+<script>
+
+</script>
+{% endblock %}
