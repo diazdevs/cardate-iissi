@@ -1,3 +1,26 @@
 body {
     background-color: #f5f5f5;
 }
+
+.tabla-horarios {
+    background: red;
+    text-align: center;
+}
+
+.tabla-horarios td {
+    background-color: green;
+}
+
+.tabla-horarios td:hover {
+    background-color: greenyellow;
+    cursor: pointer;
+}
+
+td.reservado {
+    background-color: red !important;
+}
+
+td.reservado:hover {
+    background-color: rebeccapurple !important;
+    cursor: pointer;
+}

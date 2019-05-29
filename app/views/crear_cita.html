@@ -93,7 +93,51 @@
             </div>
 
             <h1>Selecciona fecha</h1>
-            
+
+            <table class="table table-bordered tabla-horarios">
+                <thead>
+                    <tr>
+                        <th>27/05/2019</th>
+                        <th>28/05/2019</th>
+                        <th>29/05/2019</th>
+                        <th>30/05/2019</th>
+                        <th>31/05/2019</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                <tbody>
+                    <tr>
+                        <td>08:00</td>
+                        <td class="reservado">Reservado</td>
+                        <td>08:00</td>
+                        <td>08:00</td>
+                        <td>08:00</td>
+                    </tr>
+                    <tr>
+                        <td>09:00</td>
+                        <td>09:00</td>
+                        <td>09:00</td>
+                        <td>09:00</td>
+                        <td>09:00</td>
+                    </tr>
+                    <tr>
+                        <td>10:00</td>
+                        <td>10:00</td>
+                        <td>10:00</td>
+                        <td>10:00</td>
+                        <td>10:00</td>
+                    </tr>
+                    <tr>
+                        <td>11:00</td>
+                        <td>11:00</td>
+                        <td>11:00</td>
+                        <td>11:00</td>
+                        <td>11:00</td>
+                    </tr>
+                </tbody>
+                </tbody>
+            </table>
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6">
@@ -116,3 +160,12 @@
     </div>
 </main>
 {% endblock content %}
+
+
+{% block javascript %}
+
+{{ block.parent }}
+
+
+
+{% endblock %}
