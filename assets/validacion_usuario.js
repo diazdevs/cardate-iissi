@@ -196,7 +196,7 @@ function letraDNI(numeroDNI) {
         }
         return letra;
     } else {
-
+        return "";
     }
 
 
