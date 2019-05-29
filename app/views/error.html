@@ -4,11 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel='stylesheet' type='text/css' href='/assets/error.css' />
+    <title>¡Se ha producido un problema!</title>
 </head>
 <body>
     
-    <h1>{{ error }}</h1>
-    
+    <div id="clouds">
+        <div class="cloud x1"></div>
+        <div class="cloud x1_5"></div>
+        <div class="cloud x2"></div>
+        <div class="cloud x3"></div>
+        <div class="cloud x4"></div>
+        <div class="cloud x5"></div>
+    </div>
+    <div class='c'>
+        <div class='_404'>ERROR</div>
+        <hr>
+        <div class='_1'>HA OCURRIDO UN ERROR CON LA BASE DE DATOS:</div>
+        <div class='_2'><h1>{{ error }}</h1></div>
+        <a class='btn' href='/index.html'>VOLVER A LA PÁGINA PRINCIPAL</a>
+    </div>
 </body>
 </html>
