@@ -8,6 +8,14 @@ RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
 # Disable directory listing
 Options -Indexes
 
-# <Directory /htdocs/static>
-#         Options -Indexes
-# </Directory>
+# Hide the contents of directories
+IndexIgnore *
+
+# Hide files of type .php
+IndexIgnore *.php
+
+# Deny access to files with extensions .ini, .psd, .log, .sh, .php
+<FilesMatch "\.(ini|psd|log|sh|php)$">
+Order allow,deny
+Deny from all
+</FilesMatch>
