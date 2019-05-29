@@ -1,13 +1,15 @@
 function validateForm() {
+    var noValidation = document.getElementById("#formulario").noValidation;
     var error1 = validarDNI();
     var error2 = validarEmail();
     var error3 = validarTelefono();
     var error4 = validarContra();
     var error5 = validarContrasIguales();
     
-    if ((error1.length == 0) && (error2.length == 0) && (error3.length == 0) && (error4.length == 0) && (error5.length == 0)){
-        $("#formulario").submit();
-    };
+    if (!noValidation) {
+        return (error1.length == 0) && (error2.length == 0) && (error3.length == 0) && (error4.length == 0) && (error5.length == 0);
+    }
+    return true;
 }
 
 
