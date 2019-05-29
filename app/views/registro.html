@@ -9,7 +9,7 @@
     <h3>Registro cliente</h3>
 
 
-    <form action="/accounts/register" method='post'>
+    <form action="/accounts/register" id="formulario" method='post'>
       <input type="hidden" name="token" value="{{ token }}">
       <div class="row">
         <div class="form-group col-md-6">
@@ -25,8 +25,8 @@
 
         <div class="form-group col-md-6">
           <label class="col-form-label" for="apellidos">Apellidos</label>
-          <input type="text" class="form-control {% if errores.apellidos %}is-invalid{% endif %}" name="apellidos" id="apellidos"
-            value="{{form.apellidos}}" placeholder="Apellidos" required>
+          <input type="text" class="form-control {% if errores.apellidos %}is-invalid{% endif %}" name="apellidos"
+            id="apellidos" value="{{form.apellidos}}" placeholder="Apellidos" required>
           {% if errores.apellidos %}
           <div class="invalid-feedback">
             {{ errores.apellidos }}
@@ -37,8 +37,8 @@
 
       <div class="form-group">
         <label class="col-form-label" for="dni">Dni</label>
-        <input type="text" class="form-control {% if errores.dni %}is-invalid{% endif %}" name="dni" id="dni" value="{{form.dni}}"
-          placeholder="Dni" required>
+        <input type="text" class="form-control {% if errores.dni %}is-invalid{% endif %}" name="dni" id="dni"
+          value="{{form.dni}}" placeholder="Dni" required>
         {% if errores.dni %}
         <div class="invalid-feedback">
           {{ errores.dni }}
@@ -48,8 +48,8 @@
 
       <div class="form-group">
         <label class="col-form-label" for="telefono">Telefono</label>
-        <input type="text" class="form-control {% if errores.telefono %}is-invalid{% endif %}" name="telefono" id="telefono"
-          value="{{form.telefono}}" placeholder="Telefono">
+        <input type="text" class="form-control {% if errores.telefono %}is-invalid{% endif %}" name="telefono"
+          id="telefono" value="{{form.telefono}}" placeholder="Telefono">
         {% if errores.telefono %}
         <div class="invalid-feedback">
           {{ errores.telefono }}
@@ -71,8 +71,8 @@
       <div class="row">
         <div class="form-group col-md-6">
           <label class="col-form-label" for="contra1">Contraseña</label>
-          <input type="password" class="form-control {% if errores.contra1 %}is-invalid{% endif %}" name="contra1" id="contra1"
-            placeholder="Contraseña" required>
+          <input type="password" class="form-control {% if errores.contra1 %}is-invalid{% endif %}" name="contra1"
+            id="contra1" placeholder="Contraseña" required>
           {% if errores.contra1 %}
           <div class="invalid-feedback">
             {{ errores.contra1 }}
@@ -82,8 +82,8 @@
 
         <div class="form-group col-md-6">
           <label class="col-form-label" for="nombre">Repetir Contraseña</label>
-          <input type="password" class="form-control {% if errores.contra2 %}is-invalid{% endif %}" name="contra2" id="contra2"
-            placeholder="Repetir contraseña" required>
+          <input type="password" class="form-control {% if errores.contra2 %}is-invalid{% endif %}" name="contra2"
+            id="contra2" placeholder="Repetir contraseña" required>
           {% if errores.contra2 %}
           <div class="invalid-feedback">
             {{ errores.contra2 }}
@@ -96,13 +96,31 @@
       <button type="submit" class="btn btn-primary">Crear cuenta</button>
     </form>
   </div>
-{% endblock content %}
+  {% endblock content %}
 
-{% block javascript %}
-{{ block.parent }}
+  {% block javascript %}
+  {{ parent() }}
 
-<script src="/assets/validacion_usuario.js"></script>
-<script>
+  <script src="/assets/validacion_usuario.js" type="text/javascript"></script>
+  <script>
+    $(document).ready(function () {
+      $("#formulario").on("submit", function () {
+        return validateForm();
+      });
 
-</script>
-{% endblock %}
+      $("#contra1").on("keyup", function () {
+        colorContra();
+      });
+
+      $("#contra1").on("keyup", function () {
+        seguridad_clave($(this).val);
+      });
+
+      $("#dni").on("keyup", function () {
+        
+        $("#dni").val($(this).val+letraDNI($(this).val));
+      });
+
+    });
+  </script>
+  {% endblock %}
