@@ -1,7 +1,8 @@
 <?php
 
 
-// namespace core;
+// Template engine
+require_once 'vendor/autoload.php';
 
 
 /**
@@ -61,8 +62,11 @@ class Model {
     
             return $request;
         } catch (PDOException $e) {
-            echo '<h1>Error base de datos</h1>';
-            echo('<div style="padding:20px;background:#ddd;border:1px solid #999;>"Error connection: </div>' . $e->getMessage());
+            $loader = new \Twig\Loader\FilesystemLoader('app/views');
+            $twig = new \Twig\Environment($loader);
+        
+            $ctx['error'] = $e->getMessage();
+            echo $twig->render("error.html", $ctx);
             exit;
         }
 
