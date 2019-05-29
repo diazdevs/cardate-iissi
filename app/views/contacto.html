@@ -1,34 +1,32 @@
 {% extends 'base/base.html' %}
 
+{% block title %}Contacto{% endblock %}
+
 {% block content %}
 <main role="main">
 
-  <section class="jumbotron text-center" style="
-  /* fallback */
-  /* W3C */
- background: linear-gradient(to right, rgba(255, 255, 255, 0.52) 20%,                rgb(125, 189, 183)), url(http://1.bp.blogspot.com/-BiPnMV3jF2o/UE9F70zYjbI/AAAAAAAABb4/XDx-pcoFd9s/s1600/seatarosa.jpg);
- background-size: cover;
- background-position: 50% 50%;
-">
-    <div class="container">
-      <h1 class="jumbotron-heading text-light"><u>Contacto con taller</u></h1>   
-  <section class="jumbotron text-center">
-    <div class="container">
-      <p class="lead">Nuestro taller se encuentra en la localidad de Écija.<br>
-    Se encarga de la chapa y pintura de los automóviles y camiones.</p>
-        <p class="lead">Teléfono de contacto: 955900358</p>
-        <p class="lead">Web de la empresa: <A HREF= "https://www.tallerescga.com/mapa-de-talleres/1168:chapa-la-milagrosa">Chapalamilagrosa</A></p>
+        <section class="jumbotron text-center">
+                <div class="container">
+                    <h1 class="jumbotron-heading"><u>Contacto</u></h1><br>
+                    <h5>Contacto con taller</h5>
+                <div class="row justify-content-around">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12646.245835182159!2d-4.986577884689233!3d37.58894307980787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6d34244a6289b9%3A0xb9cfb25e5cd52291!2sTaller+de+Chapa+La+Milagrosa!5e0!3m2!1ses!2ses!4v1559130578599!5m2!1ses!2ses" 
+        width="400" height="300" frameborder="0"  margin=""class="rounded float-right" allowfullscreen></iframe>
+    </div>
+        <p class="lead">Nuestro taller se encuentra en la localidad de Écija.<br>
+         Se encarga de la chapa y pintura de los automóviles y camiones.</p>
+        <p class="lead"><em>Teléfono de contacto: 955900358</em></p>
+        <p class="lead"><em>Web de la empresa: <A HREF= "https://www.tallerescga.com/mapa-de-talleres/1168:chapa-la-milagrosa">Chapalamilagrosa</A></em></p>
         <hr />
-        <div class="container">
-        <h1 class="jumbotron-heading text-light"><u>Contacto con Cardate S.L.</u></h1>
-    <section class="jumbotron text-center">
-    <div class="container"> 
+
+        <h5>Contacto con Cardate</h5>
+
         <p class="lead">Cardate S.L. es la empresa desarrolladora de esta herramienta web,<br>
                 por lo que si desea ponerse en contacto con ella en caso de algún problema<br>
                 dispone de un teléfono de atención al cliente.</p>
-                <p class="lead">Teléfono de contacto: 9559452001</p>
-
-  </section>
+                <p class="lead"><em>Teléfono de contacto: 9559452001</em></p>
+                </div>
+        </section>
 
 </main>
-{% endblock %}
+{% endblock content%}
