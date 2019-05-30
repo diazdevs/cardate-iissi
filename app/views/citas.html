@@ -4,14 +4,12 @@
 
 {% block content %}
 <main role="main">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">Ver citas</h1>
 
-            <p class="lead text-muted">Gracias a cardate pedir cita online es más facil.<br> Selecciona
-                tu vehiculo<p>
-
+            <p class="lead text-muted">Gracias a cardate pedir cita online es más facil.<br> Selecciona tu vehiculo<p>
                     <table class="table">
                         <thead>
                             <tr>
@@ -34,7 +32,20 @@
                                 <td>{{ cita.motivo }}</td>
                                 <td><a href="vehiculos.php/?id={{ cita.id_vehiculo }}"> Ver información</a></td>
                                 <td><a href="/citas/{{ cita.id }}"> Detalles</a></td>
-                                <td><a href="/valoraciones/crear" class="btn btn-primary"> Añadir valoración</a></td>
+                                <td><a href="/valoraciones/crear" class="btn btn-primary"> Añadir valoración</a>
+                                    <div class="rating">
+                                        <span><input type="radio" name="rating" id="str5" value="5"><label
+                                                for="str5"></label></span>
+                                        <span><input type="radio" name="rating" id="str4" value="4"><label
+                                                for="str4"></label></span>
+                                        <span><input type="radio" name="rating" id="str3" value="3"><label
+                                                for="str3"></label></span>
+                                        <span><input type="radio" name="rating" id="str2" value="2"><label
+                                                for="str2"></label></span>
+                                        <span><input type="radio" name="rating" id="str1" value="1"><label
+                                                for="str1"></label></span>
+                                    </div>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -50,20 +61,21 @@
 {% block javascript %}
 
 {{ parent() }}
+
 <script>
-$(document).ready(function(){
-    // Check Radio-box
-    $(".rating input:radio").attr("checked", false);
+    $(document).ready(function () {
+        // Check Radio-box
+        $(".rating input:radio").attr("checked", false);
 
-    $('.rating input').click(function () {
-        $(".rating span").removeClass('checked');
-        $(this).parent().addClass('checked');
+        $('.rating input').click(function () {
+            $(".rating span").removeClass('checked');
+            $(this).parent().addClass('checked');
+        });
+
+        $('input:radio').change(
+            function () {
+                var userRating = this.value;
+                alert(userRating);
+            });
     });
-
-    $('input:radio').change(
-      function(){
-        var userRating = this.value;
-        alert(userRating);
-    }); 
-});
 </script>
