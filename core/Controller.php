@@ -68,16 +68,19 @@ class Controller {
     }
 
     // Redirect
-    public function redirect($url, $extra=false){
-        Header('Location: ' . $url);
+    public function redirect($redirect_url, $extra=false){
+        $redirect = "Location: $redirect_url";
+        Header($redirect);
     }
 
 
     /**
      * Check if user must be logged or not and redirect if needed.
      */
-    public function checkAuth($redirect_url='/', $logged=true){
+    public function checkAuth($redirect_url="/", $logged=true){
 
+        $redirect_url = "/";
+        
         // Si el usuario debe estar logueado y no lo esta redirigimos
         if ($logged && !isset($_SESSION['email_usuario']))
             $this->redirect($redirect_url);

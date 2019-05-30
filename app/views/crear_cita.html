@@ -51,7 +51,7 @@
     <div class="container mt-3">
 
         <h3>Crear cita cliente</h3>
-
+        <hr>
 
         {% if errores %}
         <div class="alert alert-danger" role="alert">
@@ -92,17 +92,13 @@
                 <textarea name="descripcion_motivo" id="" cols="30" rows="10" class="form-control"></textarea>
             </div>
 
-            <h1>Selecciona fecha</h1>
+            <h3>Selecciona fecha</h3>
+            <p>Selecciona cuando quieres traer el cocheº</p>
+            <hr>
 
             <table class="table table-bordered tabla-horarios">
                 <thead>
-                    <tr>
-                        <th>27/05/2019</th>
-                        <th>28/05/2019</th>
-                        <th>29/05/2019</th>
-                        <th>30/05/2019</th>
-                        <th>31/05/2019</th>
-
+                    <tr id="row-dates">
                     </tr>
                 </thead>
                 <tbody>
@@ -123,9 +119,9 @@
                     </tr>
                     <tr>
                         <td class="hora-cita" data-hora="10:00">10:00</td>
-                        <td class="hora-cita" data-hora="10:00">10:00</td>
-                        <td class="hora-cita" data-hora="10:00">10:00</td>
-                        <td class="hora-cita" data-hora="10:00">10:00</td>
+                        <td class="reservado">Reservado</td>
+                        <td class="reservado">Reservado</td>
+                        <td class="reservado">Reservado</td>
                         <td class="hora-cita" data-hora="10:00">10:00</td>
                     </tr>
                     <tr>
@@ -135,24 +131,40 @@
                         <td class="hora-cita" data-hora="11:00">11:00</td>
                         <td class="hora-cita" data-hora="11:00">11:00</td>
                     </tr>
+                    <tr>
+                        <td class="hora-cita" data-hora="08:00">08:00</td>
+                        <td class="reservado">Reservado</td>
+                        <td class="hora-cita" data-hora="08:00">08:00</td>
+                        <td class="hora-cita" data-hora="08:00">08:00</td>
+                        <td class="hora-cita" data-hora="08:00">08:00</td>
+                    </tr>
+                    <tr>
+                        <td class="hora-cita" data-hora="09:00">09:00</td>
+                        <td class="hora-cita" data-hora="09:00">09:00</td>
+                        <td class="hora-cita" data-hora="09:00">09:00</td>
+                        <td class="hora-cita" data-hora="09:00">09:00</td>
+                        <td class="hora-cita" data-hora="09:00">09:00</td>
+                    </tr>
+                    <tr>
+                        <td class="hora-cita" data-hora="10:00">10:00</td>
+                        <td class="hora-cita" data-hora="10:00">10:00</td>
+                        <td class="reservado">Reservado</td>
+                        <td class="hora-cita" data-hora="10:00">10:00</td>
+                        <td class="hora-cita" data-hora="10:00">10:00</td>
+                    </tr>
+                    <tr>
+                        <td class="reservado">Reservado</td>
+                        <td class="hora-cita" data-hora="11:00">11:00</td>
+                        <td class="hora-cita" data-hora="11:00">11:00</td>
+                        <td class="hora-cita" data-hora="11:00">11:00</td>
+                        <td class="hora-cita" data-hora="11:00">11:00</td>
+                    </tr>
                 </tbody>
                 </tbody>
             </table>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label class="col-form-label" for="">Hora Inicio</label>
-                        <input type="datetime-local" name="hora_inicio" class="form-control" step="1">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="col-form-label" for="">Hora Fin</label>
-                        <input type="datetime-local" name="hora_fin" class="form-control" step="1">
-                    </div>
-
-                </div>
-            </div>
-
-
+            
+            <input type="hidden" name="hora_inicio">
+            <input type="hidden" name="hora_fin">
 
             <hr>
             <button type="submit" class="btn btn-primary">Crear cita</button>
@@ -167,13 +179,49 @@
 {{ parent() }}
 
 <script>
-    $(".hora-cita").on("click", function(){
+    $(".hora-cita").on("click", function () {
+        $(".hora-cita").each(function () {
+            var trd = $(this);
+
+            if (trd.hasClass("selected")) {
+                trd.html(trd.data("hora"));
+                trd.removeClass("selected");
+            }
+        });
+
         $(this).html("Seleccionado");
         $(this).addClass("selected");
-
-        $(".hora-cita").filter(x => !x.hasClass("selected")).each(x=> x.html(x.data("hora")));
-        $(".hora-cita").filter(x => !x.hasClass("selected")).each(x=> x.removeClass("selected"));
     })
+
+    function getDaysOfWeek(dayOfWeek) {
+        var now = new Date();
+        var days = [];
+
+        i = 0;
+        while (i < 5) {
+            var dt = new Date();
+            dt.setDate(dt.getDate() + i);
+            days.push(dt);
+            i = i + 1;
+        }
+
+        return days;
+
+    }
+
+    function generaTablaHorario() {
+        var date = new Date();
+        var dayOfWeek = date.getDay();
+
+        var daysOfWeek = getDaysOfWeek(dayOfWeek);
+
+        for (var i in daysOfWeek) {
+            $("#row-dates").append("<th style='width:20%;'>" + daysOfWeek[i].toLocaleDateString("es-ES") + "</th>");
+        }
+
+        return daysOfWeek;
+    }
+    generaTablaHorario();
 </script>
 
 

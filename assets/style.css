@@ -9,6 +9,7 @@ body {
 
 .tabla-horarios td {
     background-color: #18ce83;
+    font-weight: 500;
 }
 
 .table-bordered td {
@@ -26,9 +27,15 @@ body {
 
 td.reservado {
     background-color: red !important;
+    color: #fff;
 }
 
 td.reservado:hover {
     background-color: #df0000 !important;
     cursor: pointer;
+}
+
+td.selected {
+    background-color: #18ae70 !important;
+    color: #fff;
 }
