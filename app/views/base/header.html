@@ -10,6 +10,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
+      
       {% if usuario %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -30,14 +31,20 @@
       <li class="nav-item">
         <a class="nav-link" href="/accounts/login">Iniciar sesion</a>
       </li>
+      
       {% endif %}
 
       {% if usuario.es_admin %}
       <li class="nav-item">
         <a class="nav-link" href="/admin">Administracion</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/citas">Ver todas las citas</a>
+      </li>
       {% endif %}
-
+      <li class="nav-item">
+          <a class="nav-link" href="/contacto">Contacto</a>
+        </li>
       <li class="nav-item">
         <a href="/cargar" class="nav-link">Cargar modelos</a>
       </li>

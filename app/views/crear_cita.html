@@ -108,32 +108,32 @@
                 <tbody>
                 <tbody>
                     <tr>
-                        <td>08:00</td>
+                        <td class="hora-cita" data-hora="08:00">08:00</td>
                         <td class="reservado">Reservado</td>
-                        <td>08:00</td>
-                        <td>08:00</td>
-                        <td>08:00</td>
+                        <td class="hora-cita" data-hora="08:00">08:00</td>
+                        <td class="hora-cita" data-hora="08:00">08:00</td>
+                        <td class="hora-cita" data-hora="08:00">08:00</td>
                     </tr>
                     <tr>
-                        <td>09:00</td>
-                        <td>09:00</td>
-                        <td>09:00</td>
-                        <td>09:00</td>
-                        <td>09:00</td>
+                        <td class="hora-cita" data-hora="09:00">09:00</td>
+                        <td class="hora-cita" data-hora="09:00">09:00</td>
+                        <td class="hora-cita" data-hora="09:00">09:00</td>
+                        <td class="hora-cita" data-hora="09:00">09:00</td>
+                        <td class="hora-cita" data-hora="09:00">09:00</td>
                     </tr>
                     <tr>
-                        <td>10:00</td>
-                        <td>10:00</td>
-                        <td>10:00</td>
-                        <td>10:00</td>
-                        <td>10:00</td>
+                        <td class="hora-cita" data-hora="10:00">10:00</td>
+                        <td class="hora-cita" data-hora="10:00">10:00</td>
+                        <td class="hora-cita" data-hora="10:00">10:00</td>
+                        <td class="hora-cita" data-hora="10:00">10:00</td>
+                        <td class="hora-cita" data-hora="10:00">10:00</td>
                     </tr>
                     <tr>
-                        <td>11:00</td>
-                        <td>11:00</td>
-                        <td>11:00</td>
-                        <td>11:00</td>
-                        <td>11:00</td>
+                        <td class="hora-cita" data-hora="11:00">11:00</td>
+                        <td class="hora-cita" data-hora="11:00">11:00</td>
+                        <td class="hora-cita" data-hora="11:00">11:00</td>
+                        <td class="hora-cita" data-hora="11:00">11:00</td>
+                        <td class="hora-cita" data-hora="11:00">11:00</td>
                     </tr>
                 </tbody>
                 </tbody>
@@ -164,8 +164,17 @@
 
 {% block javascript %}
 
-{{ block.parent }}
+{{ parent() }}
 
+<script>
+    $(".hora-cita").on("click", function(){
+        $(this).html("Seleccionado");
+        $(this).addClass("selected");
+
+        $(".hora-cita").filter(x => !x.hasClass("selected")).each(x=> x.html(x.data("hora")));
+        $(".hora-cita").filter(x => !x.hasClass("selected")).each(x=> x.removeClass("selected"));
+    })
+</script>
 
 
 {% endblock %}
