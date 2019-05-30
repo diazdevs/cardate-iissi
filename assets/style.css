@@ -8,12 +8,20 @@ body {
 }
 
 .tabla-horarios td {
-    background-color: green;
+    background-color: #18ce83;
+}
+
+.table-bordered td {
+    border: 1px solid #18ae70 !important;
 }
 
 .tabla-horarios td:hover {
-    background-color: #1fca00;
+    background-color: #18ae70;
     cursor: pointer;
+}
+
+.table-horarios td .selected {
+    background-color: #18ae70 !important; 
 }
 
 td.reservado {
@@ -21,6 +29,6 @@ td.reservado {
 }
 
 td.reservado:hover {
-    background-color: rebeccapurple !important;
+    background-color: #df0000 !important;
     cursor: pointer;
 }
