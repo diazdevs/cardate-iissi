@@ -26,4 +26,8 @@ class Administracion extends \Controller{
         $this->render('administracion/presupuestos.html');
     }
 
+    public function crearPresupuesto(){
+        $this->render('administracion/crear_prespuesto.html');
+    }
+
 }

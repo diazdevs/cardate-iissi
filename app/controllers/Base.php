@@ -38,4 +38,9 @@ class Base extends \Controller {
         echo 'Politicas de privacidad';
     }
 
+    public function contacto(){
+        $this->render('contacto.html');
+
+    }
+
 }

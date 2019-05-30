@@ -22,6 +22,7 @@ $router_urls = [
     
     // Dashboard
     ['admin', 'Administracion->index'],
+    ['admin/presupuesto/crear', 'Administracion->crearPresupuesto'],
 
     // Vehiculo
     ['vehiculos/crear', 'Vehiculo->create'],
