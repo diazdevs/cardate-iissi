@@ -34,6 +34,7 @@
                                 <td>{{ cita.motivo }}</td>
                                 <td><a href="vehiculos.php/?id={{ cita.id_vehiculo }}"> Ver información</a></td>
                                 <td><a href="/citas/{{ cita.id }}"> Detalles</a></td>
+                                <td><a href="/valoraciones/crear" class="btn btn-primary"> Añadir valoración</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -45,3 +46,24 @@
 
 </main>
 {% endblock content %}
+
+{% block javascript %}
+
+{{ parent() }}
+<script>
+$(document).ready(function(){
+    // Check Radio-box
+    $(".rating input:radio").attr("checked", false);
+
+    $('.rating input').click(function () {
+        $(".rating span").removeClass('checked');
+        $(this).parent().addClass('checked');
+    });
+
+    $('input:radio').change(
+      function(){
+        var userRating = this.value;
+        alert(userRating);
+    }); 
+});
+</script>
