@@ -103,10 +103,9 @@
 
   <script src="/assets/validacion_usuario.js" type="text/javascript"></script>
   <script>
-    $(document).ready(function () {
-      $("#formulario").on("submit", function (event) {
-        event.preventDefault();
-        validateForm();
+    $(document).ready(function() {
+      $("#formulario").on("submit", function () {
+        return validateForm();
       });
 
       $("#contra1").on("keyup", function () {
@@ -118,8 +117,8 @@
       });
 
       $("#dni").on("keyup", function () {
-        
-        $("#dni").val($(this).val()+letraDNI($(this).val()));
+
+        $("#dni").val($(this).val() + letraDNI($(this).val()));
       });
 
     });

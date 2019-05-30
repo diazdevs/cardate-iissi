@@ -1,20 +1,145 @@
 function validateForm() {
-    var error1 = validarDNI();
-    var error2 = validarEmail();
-    var error3 = validarTelefono();
-    var error4 = validarContra();
-    var error5 = validarContrasIguales();
-    
-    if ((error1.length == 0) && (error2.length == 0) && (error3.length == 0) && (error4.length == 0) && (error5.length == 0)){
-        $("#formulario").submit();
-    };
-}
 
+    var campo_nombre = document.getElementById("nombre");
+    var campo_apellidos = document.getElementById("apellidos");
+    var campo_nif = document.getElementById("dni");
+    var campo_e = document.getElementById("email");
+    var campo_tlf = document.getElementById("telefono");
+    var password = document.getElementById("contra1");
+    var passconfirm = document.getElementById("contra2");
 
-function validarDNI() {
+    var expreg_dni = /[0-9]{8}[A-Z]/;
+    var expreg_tlf = /^([0-9])+$/;
+    var expreg_email = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var hasNumber = /\d/;
+    var hasUpperCases = /[A-Z]/;
+    var hasLowerCases = /[a-z]/;
+    var exprTildes = /^[A-Za-záéíóúÁÉÍÓÚ\s]+$/;
+
+    var numeroDNI = dni.value.substr(0, 8);
+    var letra = dni.value.substr(-1);
+
     var valid = true;
 
+    if ($('nombre').val().trim() == "") {
+        campo_nombre.setCustomValidity("Introduzca su nombre.");
+        $('#nombre').css("background-color", "#ffeeee");
+        valid = false;
+    } else if (!exprTildes.test($('#nombre').val().trim())) {
+        campo_nombre.setCustomValidity("Introduzca un nombre válido.");
+        $('#nombre').css("background-color", "#ffeeee");
+        valid = false;
+    } else {
+        campo_nombre.setCustomValidity("");
+        $('#nombre').css("background-color", "white");
+    }
+
+    if ($('#apellidos').val().trim() == '') {
+        campo_apellidos.setCustomValidity('Introduzca sus apellidos.');
+        $('#apellidos').css("background-color", "#ffeeee");
+        valid = false;
+    } else if (!exprTildes.test($('#apellidos').val().trim())) {
+        campo_apellidos.setCustomValidity('Introduzca unos apellidos válidos.');
+        $('#apellidos').css("background-color", "#ffeeee");
+        valid = false;
+    } else {
+        campo_apellidos.setCustomValidity("");
+        $('#apellidos').css("background-color", "white");
+    }
+
+    if ($('#telefono').val().trim() == '') {
+        campo_tlf.setCustomValidity('Introduzca su número de teléfono.');
+        $('#telefono').css("background-color", "#ffeeee");
+        valid = false;
+    } else if (!expreg_tlf.test($('#telefono').val().trim())) {
+        campo_tlf.setCustomValidity('Un número de teléfono solo puede contener números.');
+        $('#telefono').css("background-color", "#ffeeee");
+        valid = false;
+    } else if ($('#telefono').val().trim().length < 9) {
+        campo_tlf.setCustomValidity('Introduzca un número de teléfono correcto');
+        $('#telefono').css("background-color", "#ffeeee");
+        valid = false;
+    } else {
+        campo_tlf.setCustomValidity("");
+        $('#telefono').css("background-color", "white");
+    }
+
+    if ($('#dni').val() == '') {
+        campo_nif.setCustomValidity('Introduzca su DNI');
+        $('#dni').css("background-color", "#ffeeee");
+        valid = false;
+    } else if (!($('#dni').val().trim().length == 9) || (!expreg_dni.test($('#dni').val().trim()))) {
+        campo_nif.setCustomValidity('Introduzca un DNI válido');
+        $('#dni').css("background-color", "#ffeeee");
+        valid = false;
+    } else if (letra != letraDNI(numeroDNI)) {
+        campo_nif.setCustomValidity('El DNI debe contener la letra adecuada');
+        $('#dni').css("background-color", "#ffeeee");
+        valid = false;
+    } else {
+        campo_nif.setCustomValidity("");
+        $('#dni').css("background-color", "white");
+    }
+
+    if ($('#email').val().trim() == '') {
+        campo_e.setCustomValidity('Introduzca su email.');
+        $('#email').css("background-color", "#ffeeee");
+        valid = false;
+    } else if (!expreg_email.test($('#email').val().trim())) {
+        campo_e.setCustomValidity('Introduzca un email correcto.');
+        $('#email').css("background-color", "#ffeeee");
+        valid = false;
+    } else {
+        campo_e.setCustomValidity("");
+        $('#email').css("background-color", "white");
+    }
+
+    if ($('#contra1').val == '') {
+        password.setCustomValidity('Introduzca una contraseña.');
+        $('#contra1').css("background-color", "#ffeeee");
+        valid = false;
+    } else if ($('#contra1').val().trim().length < 8) {
+        password.setCustomValidity('La contraseña tiene que tener 8 caracteres o más.');
+        $('#contra1').css("background-color", "#ffeeee");
+        valid = false;
+    } else if (!hasNumber.test($('#contra1').val().trim())) {
+        password.setCustomValidity('La contraseña tiene que tener mínimo un número.');
+        $('#contra1').css("background-color", "#ffeeee");
+        valid = false;
+    } else if (!hasUpperCases.test($('#contra1').val().trim())) {
+        password.setCustomValidity('La contraseña tiene que tener mínimo una letra mayúscula.');
+        $('#contra1').css("background-color", "#ffeeee");
+        valid = false;
+    } else if (!hasLowerCases.test($('#contra1').val().trim())) {
+        password.setCustomValidity('La contraseña tiene que tener mínimo una letra minúscula.');
+        $('#contra1').css("background-color", "#ffeeee");
+        valid = false;
+    } else {
+        password.setCustomValidity("");
+        $('#contra1').css("background-color", "white");
+    }
+
+    if ($('#contra2').val == '') {
+        password.setCustomValidity('Vuelva a introducir la contraseña.');
+        $('#contra2').css("background-color", "#ffeeee");
+        valid = false;
+    } else if ($('#contra2').val != $('#contra1').val) {
+        passconfirm.setCustomValidity('Las contraseñas no coinciden.');
+        $('#contra2').css("background-color", "#ffeeee");
+        valid = false;
+    } else {
+        passconfirm.setCustomValidity("");
+        $('#contra2').css("background-color", "white");
+    }
+
+    return valid;
+}
+
+/*
+function validarDNI() {
+    var valid = true;
     var campo_nif = document.getElementById('dni');
+
     var valor_nif = campo_nif.value;
 
     valid = valid && valor_nif.length == 9;
@@ -116,7 +241,7 @@ function validarContrasIguales() {
 
     return error;
 }
-
+*/
 //Funcion para calcular la letra del DNI
 function letraDNI(numeroDNI) {
     if (numeroDNI.length == 8) {
