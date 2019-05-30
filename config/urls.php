@@ -6,8 +6,6 @@ $router_urls = [
     ['about', 'Base->about'],
     ['terminos', 'Base->terminos'],
     ['privacidad', 'Base->privacidad'],
-    ['contacto', 'Base->contacto'],
-
     
     // Usuarios
     ['accounts/login', 'Usuario->login'],
@@ -24,10 +22,10 @@ $router_urls = [
     
     // Dashboard
     ['admin', 'Administracion->index'],
+    ['admin/presupuesto/crear', 'Administracion->crearPresupuesto'],
 
     // Vehiculo
     ['vehiculos/crear', 'Vehiculo->create'],
-
 ];
 
 ?>
