@@ -2,8 +2,12 @@
 
 namespace controllers\administracion;
 require_once 'app/models/usuario.php';
+require 'app/models/cita.php';
+require 'app/models/vehiculo.php';
 
 use \models\usuario\Usuario;
+use \models\vehiculo\Vehiculo;
+use \models\cita\Cita as ModeloCita;
 
 class Administracion extends \Controller{
 
@@ -19,7 +23,14 @@ class Administracion extends \Controller{
     }
 
     public function citas(){
-        $this->render('administracion/citas.html');
+        $this->checkAuth($logged=true);
+
+        $usuario = Usuario::all();
+        $citas = ModeloCita::all();
+        $this->render('administracion/citasAdmin.html', [
+            'usuario' => $usuario,
+            'citas' => $citas
+        ]);
     }
 
     public function presupuestos(){
