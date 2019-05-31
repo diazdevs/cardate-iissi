@@ -30,10 +30,12 @@ class Cita extends \Controller {
         $this->checkAuth($logged=true);
         
         $usuario = Usuario::current();
+        $citas = ModeloCita::all(['hora_inicio',]);
         
         $context = [
             'usuario' => $usuario,
             'vehiculos' => Vehiculo::filter(['id_cliente'=>$usuario->id]),
+            'citas' => $citas,
         ];
 
         if ($this->isPost()){

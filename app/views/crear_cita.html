@@ -3,45 +3,25 @@
 {% block title %}Crear cita{% endblock title %}
 
 {% block content %}
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="confirmar-cita-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nuevo vehiculo</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Confirmar cita</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Matricula:</label>
-                        <input type="text" class="form-control" placeholder="3123ASD" id="recipient-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Marca:</label>
-                        <select name="users" class="form-control" onchange="showUser(this.value)">
-                            <option>Elige una marca:</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Modelo:</label>
-                        <select name="users" class="form-control" onchange="showUser(this.value)">
-                            <option>Elige un modelo:</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Version:</label>
-                        <select name="users" class="form-control" onchange="showUser(this.value)">
-                            <option>Elige una version:</option>
-                        </select>
-                    </div>
-                </form>
+                    <p><strong>Vehiculo: </strong><span id="vehiculo-span"></span></p>
+                    <p><strong>Motivo: </strong><span id="motivo-span"></span></p>
+                    <p><strong>Descripcion motivo: </strong><span id="descripcion-span"></span></p>
+                    <p><strong>Fecha inicio: </strong><span id="fecha-inicio-span"></span></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Crear</button>
+                <button type="button" onclick="$('#formulario-cita').submit();" class="btn btn-primary">Confirmar</button>
             </div>
         </div>
     </div>
@@ -62,14 +42,12 @@
             </ul>
         </div>
         {% endif %}
-        <form action="/citas/crear" method='post'>
+        <form action="/citas/crear" id="formulario-cita" method='post'>
             <input type="hidden" name="token" value="{{ token }}">
             <div class="form-group">
-                <label class="col-form-label" for="">Vehiculo <a href="#" data-toggle="modal"
-                        data-target="#exampleModal" data-whatever="@mdo">+
-                        Nuevo</a> <a href="/vehiculos/crear">Crear vehiculo</a></label>
+                <label class="col-form-label" for="">Vehiculo <a href="/vehiculos/crear">Crear vehiculo</a></label>
 
-                <select name="id_vehiculo" class="form-control" id="">
+                <select name="id_vehiculo" class="form-control" id="vehiculo-id">
                     <option>Seleccionar vehiculo</option>
                     {% for vehiculo in vehiculos %}
                     <option value="{{ vehiculo.id }}">{{ vehiculo.matricula }}</option>
@@ -79,7 +57,7 @@
 
             <div class="form-group">
                 <label class="col-form-label" for="">Motivo</label>
-                <select name="motivo" class="form-control" id="">
+                <select name="motivo" class="form-control" id="motivo">
                     <option value="reparacion">Reparacion</option>
                     <option value="cambio pieza">Cambio pieza</option>
                     <option value="capa pintura">Capa Pintura</option>
@@ -89,12 +67,17 @@
 
             <div class="form-group">
                 <label class="col-form-label" for="">Descripcion motivo</label>
-                <textarea name="descripcion_motivo" id="" cols="30" rows="10" class="form-control"></textarea>
+                <textarea name="descripcion_motivo" cols="30" rows="10" class="form-control" id="descripcion"></textarea>
             </div>
 
             <h3>Selecciona fecha</h3>
-            <p>Selecciona cuando quieres traer el vehiculo</p>
-            <hr>
+            <p>Selecciona cuando quieres traer el coche.<code>Falta validar fecha en servidor</code></p>
+
+            
+            <div class="btn-group mb-3">
+                <button type="button" class="btn btn-outline-secondary" id="dias-anteriores">Anterior</button>
+                <button type="button" class="btn btn-outline-secondary" id="dias-siguientes">Siguiente</button>
+            </div>
 
             <table class="table table-bordered tabla-horarios">
                 <thead>
@@ -102,72 +85,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tbody>
-                    <tr>
-                        <td class="hora-cita" data-hora="08:00">08:00</td>
-                        <td class="reservado">Reservado</td>
-                        <td class="hora-cita" data-hora="08:00">08:00</td>
-                        <td class="hora-cita" data-hora="08:00">08:00</td>
-                        <td class="hora-cita" data-hora="08:00">08:00</td>
-                    </tr>
-                    <tr>
-                        <td class="hora-cita" data-hora="09:00">09:00</td>
-                        <td class="hora-cita" data-hora="09:00">09:00</td>
-                        <td class="hora-cita" data-hora="09:00">09:00</td>
-                        <td class="hora-cita" data-hora="09:00">09:00</td>
-                        <td class="hora-cita" data-hora="09:00">09:00</td>
-                    </tr>
-                    <tr>
-                        <td class="hora-cita" data-hora="10:00">10:00</td>
-                        <td class="reservado">Reservado</td>
-                        <td class="reservado">Reservado</td>
-                        <td class="reservado">Reservado</td>
-                        <td class="hora-cita" data-hora="10:00">10:00</td>
-                    </tr>
-                    <tr>
-                        <td class="hora-cita" data-hora="11:00">11:00</td>
-                        <td class="hora-cita" data-hora="11:00">11:00</td>
-                        <td class="hora-cita" data-hora="11:00">11:00</td>
-                        <td class="hora-cita" data-hora="11:00">11:00</td>
-                        <td class="hora-cita" data-hora="11:00">11:00</td>
-                    </tr>
-                    <tr>
-                        <td class="hora-cita" data-hora="08:00">08:00</td>
-                        <td class="reservado">Reservado</td>
-                        <td class="hora-cita" data-hora="08:00">08:00</td>
-                        <td class="hora-cita" data-hora="08:00">08:00</td>
-                        <td class="hora-cita" data-hora="08:00">08:00</td>
-                    </tr>
-                    <tr>
-                        <td class="hora-cita" data-hora="09:00">09:00</td>
-                        <td class="hora-cita" data-hora="09:00">09:00</td>
-                        <td class="hora-cita" data-hora="09:00">09:00</td>
-                        <td class="hora-cita" data-hora="09:00">09:00</td>
-                        <td class="hora-cita" data-hora="09:00">09:00</td>
-                    </tr>
-                    <tr>
-                        <td class="hora-cita" data-hora="10:00">10:00</td>
-                        <td class="hora-cita" data-hora="10:00">10:00</td>
-                        <td class="reservado">Reservado</td>
-                        <td class="hora-cita" data-hora="10:00">10:00</td>
-                        <td class="hora-cita" data-hora="10:00">10:00</td>
-                    </tr>
-                    <tr>
-                        <td class="reservado">Reservado</td>
-                        <td class="hora-cita" data-hora="11:00">11:00</td>
-                        <td class="hora-cita" data-hora="11:00">11:00</td>
-                        <td class="hora-cita" data-hora="11:00">11:00</td>
-                        <td class="hora-cita" data-hora="11:00">11:00</td>
-                    </tr>
+                <tbody id="row-horas">
+
                 </tbody>
                 </tbody>
             </table>
-            
-            <input type="hidden" name="hora_inicio">
-            <input type="hidden" name="hora_fin">
+
+            <input type="hidden" name="hora_inicio" id="hora-inicio">
+            <input type="hidden" name="hora_fin" id="hora-fin">
 
             <hr>
-            <button type="submit" class="btn btn-primary">Crear cita</button>
+            <a href="#" data-toggle="modal"
+            data-target="#confirmar-cita-modal" data-whatever="@mdo" class="btn btn-primary">Crear cita</a>
         </form>
     </div>
 </main>
@@ -179,7 +108,52 @@
 {{ parent() }}
 
 <script>
-    $(".hora-cita").on("click", function () {
+
+    var startDate;
+    var endDate;
+
+    var fechasOcupadas = [
+        {% for cita in citas %}
+            "{{ cita.hora_inicio }}",
+        {% endfor %}
+    ];
+
+
+
+    $("#dias-siguientes").on("click", function(){
+        generaTablaHorario(endDate);
+    });
+
+    $("#dias-anteriores").on("click", function(){
+        window.endDate.setDate(endDate.getDate()-14);
+        generaTablaHorario(window.endDate);
+    });
+
+    $('#confirmar-cita-modal').on('shown.bs.modal', function (e) {
+
+        $("#vehiculo-span").html($("#vehiculo-id option:selected").text());
+        $("#motivo-span").html($("#motivo").val());
+        $("#descripcion-span").html($("#descripcion").val());
+        $("#fecha-inicio-span").html($("#hora-inicio").val());
+
+    });
+
+    function dateToStringFormat(dt){
+        var dd = dt.getDate();
+        var mm = dt.getMonth() + 1;
+        var yy = dt.getFullYear();
+
+        var hh = dt.getHours();
+
+        dd = (dd < 10) ? "0" + dd : dd;
+        mm = (mm < 10) ? "0" + mm : mm;
+        hh = (hh < 10) ? "0" + hh : hh;
+
+        return dd + "-" + mm + "-" + yy + "T" + hh + ":00:00.000Z";
+
+    }
+
+    $("body").on("click", ".hora-cita", function () {
         $(".hora-cita").each(function () {
             var trd = $(this);
 
@@ -191,17 +165,39 @@
 
         $(this).html("Seleccionado");
         $(this).addClass("selected");
+
+        // https://stackoverflow.com/questions/476105/how-can-i-convert-string-to-datetime-with-format-specification-in-javascript
+        var dateString = $(this).data("datetime");
+        var reggie = /(\d{2})\/(\d{2})\/(\d{2}) (\d{2}):(\d{2}):(\d{2}),(\d{6})/;
+        var dateArray = reggie.exec(dateString); 
+
+        var dateObject = new Date(
+            (+dateArray[3]+2000),
+            (+dateArray[2])-1, // Careful, month starts at 0!
+            (+dateArray[1]),
+            (+dateArray[4]),
+            (+dateArray[5]),
+            (+dateArray[6]),
+            (+dateArray[7])
+        );
+        
+        $("#hora-inicio").val(dateToStringFormat(dateObject));
+        dateObject.setHours(dateObject.getHours()+1);
+        $("#hora-fin").val(dateToStringFormat(dateObject));
+
     })
 
-    function getDaysOfWeek(dayOfWeek) {
-        var now = new Date();
+    function getDaysOfWeek(from, dayOfWeek) {
+        // Devuelve los próximos 5 días quitando sábados y domingos
         var days = [];
 
         i = 0;
-        while (i < 5) {
-            var dt = new Date();
-            dt.setDate(dt.getDate() + i);
-            days.push(dt);
+        while (days.length < 5) {
+            
+            from.setDate(from.getDate() + 1);
+            if (from.getDay() != 0 && from.getDay() != 6){
+                days.push(new Date(from));
+            }
             i = i + 1;
         }
 
@@ -209,19 +205,88 @@
 
     }
 
-    function generaTablaHorario() {
-        var date = new Date();
-        var dayOfWeek = date.getDay();
+    function dateToString(dt){
+        var dd = dt.getDate();
+        var mm = dt.getMonth() + 1;
+        var yy = dt.getFullYear().toString().substr(-2);
 
-        var daysOfWeek = getDaysOfWeek(dayOfWeek);
+        dd = (dd < 10) ? "0" + dd : dd;
+        mm = (mm < 10) ? "0" + mm : mm;
+
+        return dd + "/" + mm + "/" + yy;
+    }
+
+    function getDayWithName(date) {
+        days = {
+            0: "Domingo",
+            1: "Lunes",
+            2: "Martes",
+            3: "Miércoles",
+            4: "Jueves",
+            5: "Viernes",
+            6: "Sábado"
+        }
+
+        return days[date.getDay()] + ", " + date.toLocaleDateString("es-ES")
+    }
+
+    function generaTablaHorario(dt) {
+        var dayOfWeek = dt.getDay();
+
+        var daysOfWeek = getDaysOfWeek(dt, dayOfWeek);
+        window.startDate = daysOfWeek[0];
+        window.endDate = daysOfWeek[4];
+
+        $("#row-dates").empty();
+        $("#row-horas").empty();
 
         for (var i in daysOfWeek) {
-            $("#row-dates").append("<th style='width:20%;'>" + daysOfWeek[i].toLocaleDateString("es-ES") + "</th>");
+            $("#row-dates").append("<th style='width:20%;'>" + getDayWithName(daysOfWeek[i]) + "</th>");
         }
+
+        var hora = 9;
+        while (hora < 20) {
+
+            if (hora != 15 && hora != 16){
+
+                var horaAux = (hora < 10) ? "0" + hora : hora;
+
+                $("#row-horas").append("<tr>" +
+                    "<td class='hora-cita' data-datetime='" + dateToString(daysOfWeek[0]) + " " + horaAux + ":00:00,000000" + "' data-hora='" + horaAux + ":00'>" + horaAux + ":00</td>" +
+                    "<td class='hora-cita' data-datetime='" + dateToString(daysOfWeek[1]) + " " + horaAux + ":00:00,000000" + "' data-hora='" + horaAux + ":00'>" + horaAux + ":00</td>" +
+                    "<td class='hora-cita' data-datetime='" + dateToString(daysOfWeek[2]) + " " + horaAux + ":00:00,000000" + "' data-hora='" + horaAux + ":00'>" + horaAux + ":00</td>" +
+                    "<td class='hora-cita' data-datetime='" + dateToString(daysOfWeek[3]) + " " + horaAux + ":00:00,000000" + "' data-hora='" + horaAux + ":00'>" + horaAux + ":00</td>" +
+                    "<td class='hora-cita' data-datetime='" + dateToString(daysOfWeek[4]) + " " + horaAux + ":00:00,000000" + "' data-hora='" + horaAux + ":00'>" + horaAux + ":00</td>" +
+                    "</tr>");
+            } else {
+                $("#row-horas").append("<tr>" +
+                    "<td style='background-color: white;height:49px;cursor:not-allowed;'><i>Cerrado</i></td>" +
+                    "<td style='background-color: white;height:49px;cursor:not-allowed;'><i>Cerrado</i></td>" +
+                    "<td style='background-color: white;height:49px;cursor:not-allowed;'><i>Cerrado</i></td>" +
+                    "<td style='background-color: white;height:49px;cursor:not-allowed;'><i>Cerrado</i></td>" +
+                    "<td style='background-color: white;height:49px;cursor:not-allowed;'><i>Cerrado</i></td>" +
+                    "</tr>");
+            }
+            hora = hora + 1;
+        }
+
+        $(".hora-cita").each(function(){
+
+            if (fechasOcupadas.indexOf($(this).data("datetime")) > -1){
+                $(this).addClass("reservado");
+                $(this).removeClass("hora-cita");
+                $(this).html("Ocupado");
+            }
+        })
 
         return daysOfWeek;
     }
-    generaTablaHorario();
+
+    var startDate = new Date();
+    startDate.setDate(startDate.getDate()-1);
+
+    generaTablaHorario(startDate);
+
 </script>
 
 

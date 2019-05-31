@@ -14,7 +14,7 @@ $router_urls = [
 
     // Citas
     ['citas', 'Cita->citas'],
-    ['citas/<id:^[0-9]$>', 'Cita->verCita'],
+    ['citas/<id:^[0-9]*$>', 'Cita->verCita'],
     ['citas/crear', 'Cita->crearCita'],
 
     // Crawler
