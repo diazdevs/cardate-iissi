@@ -18,7 +18,6 @@
                                 <th scope="col">Apellidos, Nombre</th>
                                 <th scope="col">Email</th>
                                 <th scope="col"></th>
-                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,8 +26,7 @@
                                 <th scope="row">1</th>
                                 <td><a href="/admin/clientes/{{ cliente.id }}">{{ cliente.apellidos }}, {{ cliente.nombre }}</a></td>
                                 <td>{{ cliente.email }}</td>
-                                <td><a href="/admin/presupuestos/crear/{{ cita.id }}"> Presupuestar</a></td>
-                                <td><a href="/citas/{{ cita.id }}"> Detalles</a></td>
+                                <td><a href="/admin/clientes/{{ cliente.id }}"> Detalles</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>

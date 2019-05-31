@@ -16,7 +16,6 @@
                 <th scope="col">Matricula</th>
                 <th scope="col">Modelo</th>
                 <th scope="col"></th>
-                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -26,8 +25,7 @@
                 <td><a href="/admin/clientes/{{ vehiculo.usuario.id }}">{{ vehiculo.usuario.apellidos }}, {{ vehiculo.usuario.nombre }}</a></td>
                 <td>{{ vehiculo.matricula }}</td>
                 <td>{{ vehiculo.modelo.nombre }} - VERSION:{{ vehiculo.modelo.nombre_version }}</td>
-                <td><a href="/admin/presupuestos/crear/{{ cita.id }}"> Presupuestar</a></td>
-                <td><a href="/citas/{{ cita.id }}"> Detalles</a></td>
+                <td><a href="#"> Detalles </a></td>
             </tr>
             {% endfor %}
         </tbody>
