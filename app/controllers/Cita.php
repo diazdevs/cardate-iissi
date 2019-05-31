@@ -4,11 +4,15 @@ namespace controllers\cita;
 require 'app/models/usuario.php';
 require 'app/models/cita.php';
 require 'app/models/vehiculo.php';
+require 'app/models/presupuesto.php';
+require 'app/models/concepto.php';
 
 require 'app/forms/cita.php';
 
 use \models\usuario\Usuario;
 use \models\vehiculo\Vehiculo;
+use \models\presupuesto\Presupuesto;
+use \models\concepto\Concepto;
 use \models\cita\Cita as ModeloCita;
 
 use \forms\cita\FormCita;
@@ -58,12 +62,24 @@ class Cita extends \Controller {
 
         $usuario = Usuario::current();
         $cita = ModeloCita::get(['id'=>$id, 'id_usuario'=>$usuario->id]);
-
+        
         if (!$cita){
             $this->http404();
         }
 
-        $this->render('detalle_cita.html', ['cita'=>$cita, 'usuario'=>Usuario::current()]);
+        $presupuesto = Presupuesto::get(['id_cita'=>$id]);
+        $conceptos = [];
+
+        if ($presupuesto){
+            $conceptos = Concepto::filter(['id_presupuesto'=>$presupuesto->id]);
+        }
+
+        $this->render('detalle_cita.html', [
+            'cita'=>$cita,
+            'usuario'=>Usuario::current(),
+            'presupuesto' => $presupuesto,
+            'conceptos' => $conceptos,
+        ]);
     }
 
 }

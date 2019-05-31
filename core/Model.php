@@ -119,7 +119,19 @@ class Model {
         $columns = join(",", array_keys($params));
         $query = "INSERT INTO :TABLE_NAME ($columns) VALUES ($values)";
         // print_r(static::class);
-        return static::requestDb($query, $params) !== false;
+        $res = static::requestDb($query, $params);
+        $created = $res !== false;
+
+        $seq_name = static::TABLE_NAME . "_SEQ";
+
+        if ($created){
+            $queryGetId = "SELECT $seq_name.CURRVAL AS insertedId FROM DUAL";
+            $res = static::requestDb($queryGetId);
+            $insertedId = $res->fetchColumn(0);
+            return $insertedId;
+        }
+
+        return false;
     }
 
     /**
