@@ -15,7 +15,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nombre</th>
+                                <th scope="col">Cliente</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Hora Inicio</th>
                                 <th scope="col">Hora Fin</th>
@@ -29,8 +29,7 @@
                             {% for cita in citas %}
                             <tr>
                                 <th scope="row">1</th>
-                                <td>{{ cita.cliente.nombre }} {{ cita.cliente.apellidos}}</td>
-                                <td>{{ cita.cliente.email }}</td>
+                                <td><a href="/admin/clientes/{{ cita.usuario.id }}">{{ cita.usuario.apellidos }}, {{ cita.usuario.nombre}}</a></td>
                                 <td>{{ cita.hora_inicio }}</td>
                                 <td>{{ cita.hora_fin }}</td>
                                 <td>{{ cita.fecha_creacion }}</td>

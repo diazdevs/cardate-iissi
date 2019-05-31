@@ -8,7 +8,13 @@
 
 
     <div class="container my-4">
-        <h1>Crear presupuesto <code>NO FUNCIONAL</code></h1>
+
+        <div class="alert alert-info">
+            <strong>Atención: </strong> Añada los precios sin iva, se calculará automáticamente.
+        </div>
+
+        <h1>Crear presupuesto <code>NO FUNCIONAL (funciona solo calculo en cliente)</code></h1>
+
         <p><strong>Cita: </strong> {{ cita.id }}</p>
         <p><strong>Motivo: </strong>{{ cita.motivo }}</p>
         <p><strong>Descripcion: </strong> {{ cita.motivo_descripcion }}</p>
@@ -18,11 +24,30 @@
 
         <hr>
 
+        <h3>Opciones básicas</h3>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Precio mano de obra: </label>
+                    <input type="text" class="form-control" value="41.322" id="presupuesto-precio-mano">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">IVA: </label>
+                    <input type="text" class="form-control" value="21" id="presupuesto-iva">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
         <h3>Añadir piezas a cambiar</h3>
 
         <div class="form-group">
             <label for="">Pieza:</label>
-            <select name="" id="" class="form-control">
+            <select name="" id="pieza" class="form-control">
                 {% for pieza in piezasVehiculo %}
                 <option value="{{ pieza.id }}">{{ pieza.descripcion }} - Codigo: {{ pieza.codigo }}</option>
                 {% endfor %}
@@ -31,17 +56,25 @@
 
 
         <div class="row">
-            <div class="col-md-6">
+
+            <div class="col-md-4">
                 <div class="form-group">
-                    <label for="">Cantidad:</label>
-                    <input type="number" class="form-control">
+                    <label for="">Mano de obra (horas):</label>
+                    <input type="number" class="form-control" id="mano-obra-pieza" value="0">
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">Cantidad:</label>
+                    <input type="number" class="form-control" id="cantidad-pieza" value="1">
+                </div>
+            </div>
+
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="">Precio unitario: <a href="#">Buscar proveedores</a></label>
-                    <input type="number" class="form-control">
+                    <input type="number" class="form-control" id="precio-pieza" value="0">
                 </div>
             </div>
 
@@ -49,41 +82,29 @@
 
 
 
-        <button class="btn btn-primary">Añadir</button>
+        <button class="btn btn-primary" id="add-pieza">Añadir</button>
 
         <hr>
 
 
-        <h3>Conceptos</h3>
+        <h3>Conceptos Extras</h3>
+        <p class="text-muted">Las piezas serán automáticamente añadidas a conceptos. Añade conceptos extra como gastos
+            de gestión, etc.</p>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Titulo</th>
                     <th>Cantidad</th>
-                    <th>Mano de obra</th>
+                    <th>Mano de obra (horas)</th>
                     <th>Precio unitario</th>
                     <th>Coste personal</th>
                     <th>Coste piezas</th>
+                    <th>Subtotal</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="body-conceptos">
                 <tr>
                     <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                </tr>
-                <tr>
                     <td><input type="text" class="form-control"></td>
                     <td><input type="text" class="form-control"></td>
                     <td><input type="text" class="form-control"></td>
@@ -95,19 +116,39 @@
             </tbody>
 
             <tfoot>
+
                 <tr>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>0.00 €</td>
-                    <td>0.00 €</td>
-                    <td>0.00 €</td>
-                    <td>0.00 €</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td id="coste-personal-final">0.00 €</td>
+                    <td id="coste-piezas-final">0.00 €</td>
+                    <td id="subtotal-final">0.00 €</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>IVA</td>
+                    <td id="iva-final"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Precio final</td>
+                    <td id="precio-final"></td>
                 </tr>
             </tfoot>
         </table>
 
 
-        <hr>
+   
 
         <button class="btn btn-primary container-fluid">Enviar presupuesto</button>
     </div>
@@ -116,4 +157,74 @@
 
 </main>
 
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+
+<script>
+    var piezas = {
+        {% for pieza in piezasVehiculo %}
+        {{ pieza.id }}: {
+            nombre: "{{ pieza.descripcion }}",
+            marca: "{{ pieza.marca }}",
+            codigo: "{{ pieza.codigo}}"
+        },
+        {% endfor %}
+    };
+
+    var conceptos = $("#body-conceptos");
+
+    var costePiezasSum = 0.0;
+    var costePersonalSum = 0.0;
+    var subTotalSum = 0.0;
+    var iva = 0.0;
+    var precioFinal = 0.0;
+
+    $("#add-pieza").on("click", function () {
+
+        var idPieza = $("#pieza").val();
+        var cantidadPieza = $("#cantidad-pieza").val();
+        var precioPieza = $("#precio-pieza").val();
+        var manoObraPieza = $("#mano-obra-pieza").val();
+
+        var presupuestoPrecioMano = $("#presupuesto-precio-mano").val();
+
+
+        var conceptoTitulo = piezas[idPieza].nombre;
+        var conceptoCostePiezas = parseFloat(precioPieza) * parseInt(cantidadPieza);
+        var conceptoCostePersonal = parseInt(manoObraPieza) * parseFloat(presupuestoPrecioMano);
+        var conceptoSubTotal = conceptoCostePersonal + conceptoCostePiezas;
+
+
+        conceptos.append("<tr id='concepto-pieza-" + idPieza + "'>" +
+            "<td><input type='text' class='form-control' disabled value='" + piezas[idPieza].nombre +
+            "'></td>" +
+            "<td><input type='text' class='form-control' disabled value='" + cantidadPieza + "'></td>" +
+            "<td><input type='text' class='form-control' disabled value='" + manoObraPieza + "'></td>" +
+            "<td><input type='text' class='form-control' disabled value='" + precioPieza + "€'></td>" +
+            "<td><input type='text' class='form-control' disabled value='" + conceptoCostePersonal +
+            "€'></td>" +
+            "<td><input type='text' class='form-control' disabled value='" + conceptoCostePiezas +
+            "€'></td>" +
+            "<td><input type='text' class='form-control' disabled value='" + conceptoSubTotal + "€'></td>" +
+            "</tr>"
+        );
+
+        costePiezasSum = costePiezasSum + conceptoCostePersonal;
+        costePersonalSum = costePersonalSum + conceptoCostePiezas;
+        subTotalSum = subTotalSum + conceptoSubTotal;
+
+        iva = subTotalSum * parseFloat($("#presupuesto-iva").val()) / 100;
+        precioFinal = subTotalSum + iva;
+
+        $("#coste-personal-final").html(costePiezasSum + " €");
+        $("#coste-piezas-final").html(costePersonalSum + " €");
+        $("#subtotal-final").html(subTotalSum + " €");
+        $("#iva-final").html(iva + " €");
+        $("#precio-final").html(precioFinal + " €");
+
+
+    });
+</script>
 {% endblock %}

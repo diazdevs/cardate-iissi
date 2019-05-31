@@ -90,6 +90,11 @@ class Administracion extends \Controller{
 
         $piezasVehiculo = Pieza::filtrarPorModelo($cita->vehiculo->modelo->id);
 
+
+        // Presupuesto::create([
+        //     'id_cita' => $id_cita,
+        // ]);
+
         // do stuff
 
         $this->render('administracion/crear_presupuesto.html', [
