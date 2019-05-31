@@ -1,51 +1,40 @@
-<link rel="paleBlueRows" type="text/css" href="/assets/paleBlueRows.css" media="screen" />
-<table class="paleBlueRows">
-        <thead>
-        <tr>
-        <th>Nombre y apellidos</th>
-        <th>Correo electrónico</th>
-        <th>Fecha de cita</th>
-        <th>Hora de cita</th>
-        <th>Número de teléfono</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-        <td>Guillermo Diaz</td>
-        <td>guillermodiaz@gmail.com</td>
-        <td>20/05/2019</td>
-        <td>10:30</td>
-        <td>653862491</td>
-        </tr>
-        <tr>
-        <td>Elena Nito del Bosque</td>
-        <td>elenanito@gmail.com</td>
-        <td>21/05/2019</td>
-        <td>12:50</td>
-        <td>652097123</td>
-        </tr>
-        <tr>
-        <td>Aitor Menta</td>
-        <td>aitor@gmail.com</td>
-        <td>22/06/2019</td>
-        <td>13:00</td>
-        <td>654821921</td>
-        </tr>
-        <tr>
-        <td>Jesus Tomas Dado</td>
-        <td>jesustomas@gmail.com</td>
-        <td>22/06/2019</td>
-        <td>13:00</td>
-        <td>652984172</td>
-        </tr>
-        <tr>
-        <td>Lola Mento</td>
-        <td>lolamento@gmail.com</td>
-        <td>24/07/2019</td>
-        <td>09:00</td>
-        <td>643182828</td>
-        </tr>
-        </tbody>
-        </table>
+{% extends 'base/base.html' %}
+
+{% block title %}Todas las citas{% endblock %}
+
+{% block content %}
+<main role="main">
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Ver todas los usuarios con cita</h1>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Fecha cita</th>
+                                <th scope="col">Telefono</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cita in citas %}
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{ usuario.nombre }}</td>
+                                <td>{{ usuario.apellidos }}</td>
+                                <td>{{ usuario.email }}</td>
+                                <td>{{ cita.hora_inicio }}</td>
+                                <td>{{ usuario.telefono }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+        </div>
+    </section>
 
 
+</main>
+{% endblock content %}
