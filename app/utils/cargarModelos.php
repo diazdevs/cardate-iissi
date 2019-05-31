@@ -17,7 +17,7 @@ $marcas = array();
 
 function getMarcas(){
     $client = new Client();
-    $url_marcas = 'http://www.vehiclepartsdatabase.com/vehicles/allprivateroadvehicles';
+    $url_marcas = 'https://web.archive.org/web/20180225071710/http://www.vehiclepartsdatabase.com/vehicles/allprivateroadvehicles';
     $crawler = $client->request('GET', $url_marcas);
     $marcas = $crawler->filter('.grid-whole > a')->extract(['_text', 'href']);
     return $marcas;
@@ -25,7 +25,7 @@ function getMarcas(){
 
 function cargarMarca($url_marca){
     $client = new Client();
-    $url_marca = 'http://www.vehiclepartsdatabase.com' . $url_marca;
+    $url_marca = 'https://web.archive.org' . $url_marca;
     $crawler = $client->request('GET', $url_marca);
     $modelos = $crawler->filter('.grid-half > a')->extract(['_text', 'href']);
     $imagenMarca = $crawler->filter('.grid-whole > img')->extract(['src']);
@@ -37,7 +37,7 @@ function cargarMarca($url_marca){
 
 function cargarModelo($url_modelo){
     $client = new Client();
-    $url_modelo = 'http://www.vehiclepartsdatabase.com' . $url_modelo;
+    $url_modelo = 'https://web.archive.org' . $url_modelo;
     $crawler = $client->request('GET', $url_modelo);
     $versiones = $crawler->filter('.grid-whole > a')->extract(['_text', 'href']);
     return $versiones;
@@ -45,7 +45,7 @@ function cargarModelo($url_modelo){
 
 function cargarVersion($url_version){
     $client = new Client();
-    $url_version = 'http://www.vehiclepartsdatabase.com/' . $url_version;
+    $url_version = 'https://web.archive.org' . $url_version;
     $crawler = $client->request('GET', $url_version);
     // $piezas = $crawler->filter('.grid-whole .left')->filter('a')->extract(['_text', 'href']);
     $propiedades = $crawler->filter('.grid-10 > div')->extract(['_text']);

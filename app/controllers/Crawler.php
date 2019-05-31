@@ -9,6 +9,6 @@ namespace controllers\crawler;
 class Crawler {
 
     public function crawler(){
-        require_once 'app/utils/cargarModelos2.php';
+        require_once 'app/utils/cargarModelos.php';
     }
 }
