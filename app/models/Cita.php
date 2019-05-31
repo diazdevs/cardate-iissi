@@ -12,7 +12,7 @@ class Cita extends \Model {
     public $motivo;
     public $descripcion_motivo;
     public $id_vehiculo;
-    public $id_cliente;
+    public $id_usuario;
 
     private $cliente = null;
 
@@ -22,7 +22,7 @@ class Cita extends \Model {
             if (!class_exists($class))
                 require_once "app/models/usuario.php";
             
-            $this->cliente = $class::get(['id'=>$this->id_cliente]);
+            $this->cliente = $class::get(['id'=>$this->id_usuario]);
         } 
         return $this->cliente;
         

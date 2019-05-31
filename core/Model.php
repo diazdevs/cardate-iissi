@@ -47,6 +47,16 @@ class Model {
         }
     }
 
+    protected function getForeignKey($name){
+        if (isset($this->{"id_$name"})) {
+            $class =  "\models\\$name\\$name";
+            if (!class_exists($class))
+                require_once "app/models/$name.php";
+            return $class::get(['id'=>$this->{"id_$name"}]);
+        }
+        return null;
+    }
+
     public static function requestDb($query, $params=false) {
         // Ver mas sobre try-catch https://phpdelusions.net/delusion/try-catch
         global $connection;

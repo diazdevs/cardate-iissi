@@ -23,8 +23,12 @@ $router_urls = [
     
     // Dashboard
     ['admin', 'Administracion->index'],
-    ['admin/presupuestos/crear/<id_cita:^[0-9]*$>', 'Administracion->crearPresupuesto'],
     ['admin/citas', 'Administracion->citas'],
+    ['admin/clientes', 'Administracion->clientes'],
+    ['admin/clientes/<id_cliente:^[0-9]*$>', 'Administracion->clientes_detalle'],
+    ['admin/vehiculos', 'Administracion->vehiculos'],
+
+    ['admin/presupuestos/crear/<id_cita:^[0-9]*$>', 'Administracion->crearPresupuesto'],
 
     // Vehiculo
     ['vehiculos/crear', 'Vehiculo->create'],

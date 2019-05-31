@@ -31,7 +31,7 @@ class Vehiculo extends \Controller {
                 ModeloVehiculo::create([
                     'matricula' => $formulario->getData()['matricula'],
                     'id_modelo' => $formulario->getData()['id_modelo'],
-                    'id_cliente' => $usuario->id,
+                    'id_usuario' => $usuario->id,
                 ]);
                 $this->redirect('/citas/crear');
             } else {

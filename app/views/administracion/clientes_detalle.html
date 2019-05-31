@@ -1,0 +1,76 @@
+{% extends 'administracion/base/base.html' %}
+
+
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1>Cliente: {{ cliente.apellidos }}, {{ cliente.nombre }}</h1>
+
+    <p><strong>DNI:</strong> {{ cliente.dni }}</p>
+    <p><strong>Email:</strong> {{ cliente.email }}</p>
+    <p><strong>Fecha registro:</strong> {{ cliente.fecha_creacion }}</p>
+
+
+
+
+    <h3>Citas</h3>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Hora Inicio</th>
+                <th scope="col">Hora Fin</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Motivo</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cita in citas %}
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ cita.hora_inicio }}</td>
+                <td>{{ cita.hora_fin }}</td>
+                <td>{{ cita.fecha_creacion }}</td>
+                <td>{{ cita.motivo }}</td>
+                <td><a href="/admin/presupuestos/crear/{{ cita.id }}"> Presupuestar</a></td>
+                <td><a href="/citas/{{ cita.id }}"> Detalles</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <h3>Vehiculos</h3>
+
+    <table class="table striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Matricula</th>
+                <th scope="col">Modelo</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehiculo in vehiculos %}
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ vehiculo.matricula }}</td>
+                <td>{{ vehiculo.modelo.nombre }}</td>
+                <td><a href="/admin/presupuestos/crear/{{ cita.id }}"> Presupuestar</a></td>
+                <td><a href="/citas/{{ cita.id }}"> Detalles</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock content %}

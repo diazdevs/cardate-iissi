@@ -1,0 +1,38 @@
+{% extends 'administracion/base/base.html' %}
+
+{% block content %}
+
+
+<div class="container mt-4">
+    <h1 class="jumbotron-heading">Vehículos</h1>
+
+    <p class="lead text-muted">A continuación se muestran los vehiculos registrados en el taller</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Cliente (Apellidos, Nombre)</th>
+                <th scope="col">Matricula</th>
+                <th scope="col">Modelo</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehiculo in vehiculos %}
+            <tr>
+                <th scope="row">1</th>
+                <td><a href="/admin/clientes/{{ vehiculo.usuario.id }}">{{ vehiculo.usuario.apellidos }}, {{ vehiculo.usuario.nombre }}</a></td>
+                <td>{{ vehiculo.matricula }}</td>
+                <td>{{ vehiculo.modelo.nombre }} - VERSION:{{ vehiculo.modelo.nombre_version }}</td>
+                <td><a href="/admin/presupuestos/crear/{{ cita.id }}"> Presupuestar</a></td>
+                <td><a href="/citas/{{ cita.id }}"> Detalles</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock content %}

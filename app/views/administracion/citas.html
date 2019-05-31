@@ -1,0 +1,48 @@
+{% extends 'administracion/base/base.html' %}
+
+
+
+{% block content %}
+
+
+
+        <div class="container mt-4">
+            <h1 class="jumbotron-heading">Citas</h1>
+
+            <p class="lead text-muted">Gracias a cardate pedir cita online es más facil.<p>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Hora Inicio</th>
+                                <th scope="col">Hora Fin</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Motivo</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cita in citas %}
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{ cita.cliente.nombre }} {{ cita.cliente.apellidos}}</td>
+                                <td>{{ cita.cliente.email }}</td>
+                                <td>{{ cita.hora_inicio }}</td>
+                                <td>{{ cita.hora_fin }}</td>
+                                <td>{{ cita.fecha_creacion }}</td>
+                                <td>{{ cita.motivo }}</td>
+                                <td><a href="/admin/presupuestos/crear/{{ cita.id }}"> Presupuestar</a></td>
+                                <td><a href="/citas/{{ cita.id }}"> Detalles</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+        </div>
+ 
+
+
+{% endblock content %}

@@ -19,7 +19,7 @@ class Cita extends \Controller {
         $this->checkAuth($logged=true);
 
         $usuario = Usuario::current();
-        $citas = ModeloCita::filter(['id_cliente'=>$usuario->id]);
+        $citas = ModeloCita::filter(['id_usuario'=>$usuario->id]);
         $this->render('citas.html', [
             'usuario' => $usuario,
             'citas' => $citas
@@ -34,7 +34,7 @@ class Cita extends \Controller {
         
         $context = [
             'usuario' => $usuario,
-            'vehiculos' => Vehiculo::filter(['id_cliente'=>$usuario->id]),
+            'vehiculos' => Vehiculo::filter(['id_usuario'=>$usuario->id]),
             'citas' => $citas,
         ];
 
@@ -42,7 +42,7 @@ class Cita extends \Controller {
             $formulario = new FormCita($_POST);
             if ($formulario->valid()){
                 $datos = $formulario->getData();
-                $datos['id_cliente'] = $usuario->id;
+                $datos['id_usuario'] = $usuario->id;
                 ModeloCita::create($datos);
                 $this->redirect('/citas');
             } else {
@@ -57,7 +57,7 @@ class Cita extends \Controller {
         $this->checkAuth($logged=true);
 
         $usuario = Usuario::current();
-        $cita = ModeloCita::get(['id'=>$id, 'id_cliente'=>$usuario->id]);
+        $cita = ModeloCita::get(['id'=>$id, 'id_usuario'=>$usuario->id]);
 
         if (!$cita){
             $this->http404();
