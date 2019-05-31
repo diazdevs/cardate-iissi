@@ -17,8 +17,6 @@ class Cita extends \Model {
     // Foreign keys
     private $vehiculo;
     private $usuario;
-    private $presupuesto;
-    
     
     public function getVehiculo(){
         if ($this->vehiculo == null) {
