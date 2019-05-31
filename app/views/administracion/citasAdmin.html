@@ -1,12 +1,12 @@
-{% extends 'base/base.html' %}
+{% extends 'administracion/base/base.html' %}
 
-{% block title %}Todas las citas{% endblock %}
+
 
 {% block content %}
-<main role="main">
 
-    <section class="jumbotron text-center">
-        <div class="container">
+
+
+        <div class="container mt-4">
             <h1 class="jumbotron-heading">Ver todas las citas</h1>
 
             <p class="lead text-muted">Gracias a cardate pedir cita online es más facil.<p>
@@ -21,7 +21,7 @@
                                 <th scope="col">Hora Fin</th>
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Motivo</th>
-                                <th scope="col">Vehiculo</th>
+                                <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -29,21 +29,20 @@
                             {% for cita in citas %}
                             <tr>
                                 <th scope="row">1</th>
-                                <td>{{ usuario.nombre }}</td>
-                                <td>{{ usuario.email }}</td>
+                                <td>{{ cita.cliente.nombre }} {{ cita.cliente.apellidos}}</td>
+                                <td>{{ cita.cliente.email }}</td>
                                 <td>{{ cita.hora_inicio }}</td>
                                 <td>{{ cita.hora_fin }}</td>
                                 <td>{{ cita.fecha_creacion }}</td>
                                 <td>{{ cita.motivo }}</td>
-                                <td><a href="vehiculos.php/?id={{ cita.id_vehiculo }}"> Ver información</a></td>
+                                <td><a href="/admin/presupuestos/crear/{{ cita.id }}"> Presupuestar</a></td>
                                 <td><a href="/citas/{{ cita.id }}"> Detalles</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
         </div>
-    </section>
+ 
 
 
-</main>
 {% endblock content %}

@@ -7,6 +7,7 @@ $router_urls = [
     ['terminos', 'Base->terminos'],
     ['privacidad', 'Base->privacidad'],
     ['contacto', 'Base->contacto'],
+
     // Usuarios
     ['accounts/login', 'Usuario->login'],
     ['accounts/register', 'Usuario->register'],
@@ -22,9 +23,8 @@ $router_urls = [
     
     // Dashboard
     ['admin', 'Administracion->index'],
-    ['admin/presupuesto/crear', 'Administracion->crearPresupuesto'],
-    ['admin/citas', 'Administracion->verCitasAdmin'],
-
+    ['admin/presupuestos/crear/<id_cita:^[0-9]*$>', 'Administracion->crearPresupuesto'],
+    ['admin/citas', 'Administracion->citas'],
 
     // Vehiculo
     ['vehiculos/crear', 'Vehiculo->create'],

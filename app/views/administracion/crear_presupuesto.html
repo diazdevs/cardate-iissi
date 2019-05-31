@@ -1,0 +1,43 @@
+{% extends 'administracion/base/base.html' %}
+
+{% block title %}Crear presupuesto{% endblock %}
+
+{% block content %}
+<main role="main my-3">
+
+
+
+    <div class="container mt-3">
+        <h1>Crear presupuesto</h1>
+        <h3>Cita motivo: {{ cita.motivo }}</h3>
+        <p>Cliente: {{ cita.cliente.nombre }} {{ cita.cliente.apellidos }}</p>
+        
+        <div class="top">
+            <div class="budget">
+                <form action="/admin/citas" method="post">
+                    <div>
+                        <label for="id12">El presupuesto estimado tras la revisión será:</label>
+                        <input type="Insertar el presupuesto estimado" class="form-control">
+                    </div>
+                    <div>
+                        <label for="id12">El tiempo estimado tras la revisión será:</label>
+                        <input type="Insertar el tiempo estimado">
+                        <select name="Insertar magnitud de tiempo" class="form-control">
+                            <option value="1">Minutos</option>
+                            <option value="2">Horas</option>
+                            <option value="3">Dias</option>
+                        </select>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                            <a class="btn btn-danger" href="/admin/citas">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+{% endblock %}

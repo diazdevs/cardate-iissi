@@ -7,7 +7,7 @@ require 'app/models/vehiculo.php';
 
 use \models\usuario\Usuario;
 use \models\vehiculo\Vehiculo;
-use \models\cita\Cita as ModeloCita;
+use \models\cita\Cita;
 
 class Administracion extends \Controller{
 
@@ -26,7 +26,7 @@ class Administracion extends \Controller{
         $this->checkAuth($logged=true);
 
         $usuario = Usuario::all();
-        $citas = ModeloCita::all();
+        $citas = Cita::all();
         $this->render('administracion/citasAdmin.html', [
             'usuario' => $usuario,
             'citas' => $citas
@@ -37,8 +37,15 @@ class Administracion extends \Controller{
         $this->render('administracion/presupuestos.html');
     }
 
-    public function crearPresupuesto(){
-        $this->render('administracion/crear_prespuesto.html');
+    public function crearPresupuesto($id_cita){
+        $cita = Cita::get(["id"=>$id_cita]);
+        if (!$cita){
+            $this->http404();
+        }
+
+        $this->render('administracion/crear_presupuesto.html', [
+            'cita' => $cita,
+        ]);
     }
 
 }
