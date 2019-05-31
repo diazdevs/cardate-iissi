@@ -5,7 +5,7 @@
 {% block content %}
 <main role="main">
 
-    <section class="jumbotron text-center">
+    <section class="text-center mt-5">
         <div class="container">
             <h1 class="jumbotron-heading">Cita #{{ cita.id }}</h1>
             <h3>Descripcion motivo</h3>
@@ -35,10 +35,78 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </section>
 
-            <h3>Presupuesto</h3>
+    <section class="presupuesto text-center">
+        <div class="container">
+
+            <h3 class="mb-4">Presupuesto</h3>
+            {% if presupuesto %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Cantidad</th>
+                        <th>Mano de obra (horas)</th>
+                        <th>Precio unitario</th>
+                        <th>Coste personal</th>
+                        <th>Coste piezas</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody id="body-conceptos">
+                    {% for concepto in conceptos %}
+                    <tr>
+                        <td>{{ concepto.titulo }}</td>
+                        <td>{{ concepto.cantidad }}</td>
+                        <td>{{ concepto.mano_de_obra }}</td>
+                        <td>{{ concepto.precio_unitario }} €</td>
+                        <td>{{ concepto.coste_personal }} €</td>
+                        <td>{{ concepto.coste_piezas }} €</td>
+                        <td>{{ concepto.precio }} €</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+
+                <tfoot>
+
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="coste-personal-final">{{ presupuesto.coste_personal }} €</td>
+                        <td id="coste-piezas-final">{{ presupuesto.coste_piezas }} €</td>
+                        <td id="subtotal-final">{{ presupuesto.precio }} €</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>IVA</td>
+                        <td id="iva-final">{{ presupuesto.impuestos }} €</td>
+                    </tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><strong>Precio final</strong></td>
+                        <td id="precio-final"><strong>{{ presupuesto.precio_final }} €</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+            {% else %}
             <p>No se ha recibido ningun presupuesto</p>
-            <a href="/crear_cita.php" class="btn btn-danger">Cancelar</a>
+            {% endif %}
+            {% if presupuesto %}
+            <a href="#" class="btn btn-primary">Aceptar presupuesto y pagar</a>
+            {% endif %}
+            <a href="#" class="btn btn-danger">Cancelar</a>
         </div>
     </section>
 
