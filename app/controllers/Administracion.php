@@ -4,10 +4,12 @@ namespace controllers\administracion;
 require_once 'app/models/usuario.php';
 require 'app/models/cita.php';
 require 'app/models/vehiculo.php';
+require 'app/models/pieza.php';
 
 use \models\usuario\Usuario;
 use \models\vehiculo\Vehiculo;
 use \models\cita\Cita;
+use \models\pieza\Pieza;
 
 class Administracion extends \Controller{
 
@@ -82,13 +84,17 @@ class Administracion extends \Controller{
     }
 
     public function crearPresupuesto($id_cita){
+
         $cita = Cita::get(["id"=>$id_cita]);
-        if (!$cita){
-            $this->http404();
-        }
+        if (!$cita) $this->http404();
+
+        $piezasVehiculo = Pieza::filtrarPorModelo($cita->vehiculo->modelo->id);
+
+        // do stuff
 
         $this->render('administracion/crear_presupuesto.html', [
             'cita' => $cita,
+            'piezasVehiculo' => $piezasVehiculo,          
         ]);
     }
 

@@ -3,38 +3,114 @@
 {% block title %}Crear presupuesto{% endblock %}
 
 {% block content %}
-<main role="main my-3">
+<main role="main">
 
 
 
-    <div class="container mt-3">
-        <h1>Crear presupuesto</h1>
-        <h3>Cita motivo: {{ cita.motivo }}</h3>
-        <p>Cliente: {{ cita.cliente.nombre }} {{ cita.cliente.apellidos }}</p>
-        
-        <div class="top">
-            <div class="budget">
-                <form action="/admin/citas" method="post">
-                    <div>
-                        <label for="id12">El presupuesto estimado tras la revisión será:</label>
-                        <input type="Insertar el presupuesto estimado" class="form-control">
-                    </div>
-                    <div>
-                        <label for="id12">El tiempo estimado tras la revisión será:</label>
-                        <input type="Insertar el tiempo estimado">
-                        <select name="Insertar magnitud de tiempo" class="form-control">
-                            <option value="1">Minutos</option>
-                            <option value="2">Horas</option>
-                            <option value="3">Dias</option>
-                        </select>
-                        <div>
-                            <button type="submit" class="btn btn-primary">Aceptar</button>
-                            <a class="btn btn-danger" href="/admin/citas">Cancelar</a>
-                        </div>
-                    </div>
-                </form>
-            </div>
+    <div class="container my-4">
+        <h1>Crear presupuesto <code>NO FUNCIONAL</code></h1>
+        <p><strong>Cita: </strong> {{ cita.id }}</p>
+        <p><strong>Motivo: </strong>{{ cita.motivo }}</p>
+        <p><strong>Descripcion: </strong> {{ cita.motivo_descripcion }}</p>
+        <p><strong>Cliente: </strong> <a href="/admin/clientes/{{ cita.usuario.id }}"
+                target="_blank">{{ cita.usuario.nombre }}
+                {{ cita.usuario.apellidos }}</a></p>
+
+        <hr>
+
+        <h3>Añadir piezas a cambiar</h3>
+
+        <div class="form-group">
+            <label for="">Pieza:</label>
+            <select name="" id="" class="form-control">
+                {% for pieza in piezasVehiculo %}
+                <option value="{{ pieza.id }}">{{ pieza.descripcion }} - Codigo: {{ pieza.codigo }}</option>
+                {% endfor %}
+            </select>
         </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Cantidad:</label>
+                    <input type="number" class="form-control">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Precio unitario: <a href="#">Buscar proveedores</a></label>
+                    <input type="number" class="form-control">
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <button class="btn btn-primary">Añadir</button>
+
+        <hr>
+
+
+        <h3>Conceptos</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Cantidad</th>
+                    <th>Mano de obra</th>
+                    <th>Precio unitario</th>
+                    <th>Coste personal</th>
+                    <th>Coste piezas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                </tr>
+
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>0.00 €</td>
+                    <td>0.00 €</td>
+                    <td>0.00 €</td>
+                    <td>0.00 €</td>
+                </tr>
+            </tfoot>
+        </table>
+
+
+        <hr>
+
+        <button class="btn btn-primary container-fluid">Enviar presupuesto</button>
+    </div>
     </div>
 
 
